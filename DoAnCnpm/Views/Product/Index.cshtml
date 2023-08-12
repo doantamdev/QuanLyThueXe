@@ -1,0 +1,68 @@
+﻿@using DoAnCnpm.Models;
+@using PagedList.Mvc;
+@model PagedList.PagedList<Product>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/TrangDatXe.cshtml";
+}
+
+<link href="~/Content/showsp.css" rel="stylesheet" />
+
+<style>
+    .center-details {
+        display: inline-block;
+        text-align: center;
+        width: 100%;
+        color:white;
+        font-weight:bold;
+        padding:0.5rem;
+    }
+</style>
+
+<div id="div-ds"><h2 style="padding-top:10px;color:black"> <b>DANH SÁCH SẢN PHẨM</b></h2></div>
+<div id="div-ds-2"><h2 style="color:black"></h2></div>
+
+@using (Html.BeginForm("Index", "Product", FormMethod.Get))
+{
+    <table>
+        <tr>
+            <td>
+
+                &nbsp; Tìm kiếm: <input type="text" name="_name" />
+                <input type="submit" name="Search" />
+            </td>
+            <td style="margin-left:100px">
+                &nbsp; Đơn giá từ: <input type="text" name="min" />
+                &nbsp; Đến:        <input type="text" name="max" />
+                <input type="submit" name="Tìm giá" />
+            </td>
+        </tr>
+    </table>
+}
+
+
+    <div class="container">
+        <div class="row">
+            @foreach (var pro in Model)
+            {
+                <div class="col-sm-12 col-sm-6 col-md-4 col-lg-3" style="margin-top:15px;">
+                    <div id="khungsp" style="border:1px solid gainsboro;width:250px;height:400px;padding:0.5rem">
+                        <div class="card-pro">
+                            <img src="@Url.Content(pro.ImagePro)" height="220" width="237" />
+                            <p style="margin-top:10px ; text-align:center"><b>@Html.DisplayFor(model => pro.NamePro) | @Html.DisplayFor(model => pro.Price) Ngàn</b></p>
+                            <p style="margin-left:5px"><b>Mẫu xe: <i style="color:orangered">@Html.DisplayFor(model => pro.MauXe)</i></b> </p>
+                            <p style="margin-left:5px;color:forestgreen"><img src="~/Content/images/location.png" id="address"> <b> @Html.DisplayFor(model => pro.Vitri) </b></p>
+                            <div id="khungtt">
+                                @Html.ActionLink("CHI TIẾT", "Details", new { id = pro.ProductID }, new { @class = "center-details" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+                Trang @(Model.PageCount<Model.PageNumber ?0 : Model.PageNumber) /@Model.PageCount
+                <div class="MenuPage">
+                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
+                </div>

@@ -1,0 +1,58 @@
+﻿@model DoAnCnpm.Models.OrderPro
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/Adminlayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>OrderPro</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DateOrder)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateOrder)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AddressDeliverry)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AddressDeliverry)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NameCusNonAccount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NameCusNonAccount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PhoneCusNonAccount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhoneCusNonAccount)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Customer.NameCus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Customer.NameCus)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "QuanLyDonHang")
+</p>

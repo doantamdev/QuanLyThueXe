@@ -1,0 +1,34 @@
+﻿@model DoAnCnpm.Models.Product
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/TrangDatXe.cshtml";
+}
+
+<<div style="margin: 10px auto; width: 70%;margin-bottom:45px;">
+    <h2 style="text-align: center">CHI TIẾT SẢN PHẨM</h2>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <img style="width: 200px;height:250px" src="@Url.Content(Model.ImagePro)">
+        </div>
+        <div class="col-md-6">
+            <h4>Tên sản phẩm: @Model.NamePro</h4>
+            <p style="text-align: justify">
+                <span style="font-weight: bold">Mô tả:</span> @Model.DecriptionPro
+            </p>
+            <p class="price">
+                Giá bán: <span style="color:red; font-size:24px;">
+                    @Model.Price
+                    VNĐ
+                </span>
+            </p>
+            <div id="khungtt" style="margin-bottom:5px">
+                <a href="/ShoppingCart/AddToCart/@Model.ProductID">
+                    <p style="box-sizing:border-box; text-align:center; margin-top:10px;" ><b>CHỌN MUA</b></p>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+

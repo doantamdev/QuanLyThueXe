@@ -1,0 +1,128 @@
+﻿body {
+    margin: 0px;
+    padding: 0px;
+}
+
+#div-headtop {
+    height: 70px;
+    width: 100%;
+    background-color: black;
+    float: left
+}
+
+a.double {
+    border-style: double;
+}
+
+.chuheadtop {
+    color: aliceblue;
+    text-align: center;
+    font-size: 20px;
+    padding: 12px;
+}
+
+
+#div-top {
+    min-height: 90px;
+    width: 100%;
+    background-color: white;
+}
+
+#div-top-end {
+    min-height: 10px;
+    width: 100%;
+    background-color: white;
+}
+
+#div-quangcao {
+    min-height: 700px;
+    width: 100%;
+    background-color: white;
+}
+
+#div-slide-khuyenmai {
+    min-height: 50px;
+    width: 100%;
+}
+
+#div-main-slide {
+    min-height: 400px;
+    width: 100%;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    background-color: white;
+}
+
+#div-slide {
+    width: 50%;
+    height: 350px;
+    margin-left: 200px;
+}
+
+#div-main-body {
+    width: 100%;
+    min-height: 400px;
+    float: left;
+}
+
+
+#div-footer {
+    height: 500px;
+    width: 100%;
+    background-color: black;
+    bottom: 0px;
+    float: left;
+}
+
+    #div-footer p {
+        text-align: center;
+        left: 50%;
+        padding-top: 5px;
+    }
+
+
+
+#address {
+    width: 25px;
+    margin-right: 10px;
+    vertical-align: middle;
+    border: 0;
+    margin-top: 5px;
+    font-size: 50px;
+    margin-bottom: 5px;
+}
+
+#list-store {
+    float: left;
+    width: 400px;
+    height: 100px;
+    font-family: 'Helvetica';
+    font-weight: lighter;
+}
+
+#view-address {
+    margin-left: 100px;
+    margin-top: 10px;
+    text-align: center;
+    background-color: mintcream;
+    border-radius: 5px;
+    width: 250px;
+    height: 30px;
+    padding: 5px;
+}
+
+#address-span {
+    font-size: 17px;
+    height: 44px;
+    color: aliceblue;
+}
+
+
+#format-address {
+    height: 350px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    max-width: 500px;
+    margin-left: 50px;
+    margin-top: 10px;
+}

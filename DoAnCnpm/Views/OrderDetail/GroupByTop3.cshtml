@@ -1,0 +1,29 @@
+﻿@model IEnumerable<DoAnCnpm.Models.ViewModel>
+
+@{
+    ViewBag.Title = "GroupByTop3";
+    Layout = "~/Views/Shared/Adminlayout.cshtml";
+}
+
+<h2>Báo cáo doanh thu thuê nhiều nhất</h2>
+<table class="table-bordered" style="text-align:center">
+    <tr>
+        <th>Mã sản phẩm</th>
+        <th>Tên sản phẩm</th>
+        <th>Hình sản phẩm</th>
+        <th>Giá</th>
+    </tr>
+
+    @foreach (var i in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(model => i.IDPro)</td>
+            <td>@Html.DisplayFor(model => i.NamePro)</td>
+            <td>
+                <img src="@Url.Content(i.ImgPro)" height="150" width="150" />
+            </td>
+            <td>@Html.DisplayFor(model => i.pricePro)</td>
+        </tr>
+    }
+</table>
+

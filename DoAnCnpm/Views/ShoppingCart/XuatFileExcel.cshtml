@@ -1,0 +1,52 @@
+﻿@model IEnumerable<DoAnCnpm.Models.OrderPro>
+
+@{
+    ViewBag.Title = "XuatFileExcel";
+    Layout = "~/Views/Shared/Adminlayout.cshtml";
+}
+
+<h3 class="card-title">Danh sách đơn hàng</h3>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>
+<table class="table table-bordered">
+    <thead>
+        <tr st>
+            <th style="text-align:center">
+                Ngày đặt
+            </th>
+            <th style="text-align:center">
+                Địa chỉ Cus
+            </th>
+            <th style="text-align:center">Trạng thái</th>
+            <th>Ghi chú</th>
+        </tr>
+    <thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateOrder)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AddressDeliverry)
+                </td>
+
+                <td>@(item.TypePayment==1?"Chờ thành toán":"Đã thanh toán")</td>
+                <td>
+          
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<br />
+<input type="submit" id="btnExport" value="Export" />
+<script type="text/javascript">
+    $("#btnExport").click(function () {
+        $(".table-bordered").table2excel({
+            filename: "donhang.xls"
+        });
+    });
+</script>

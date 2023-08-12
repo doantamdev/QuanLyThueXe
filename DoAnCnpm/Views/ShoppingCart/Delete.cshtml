@@ -1,0 +1,65 @@
+﻿@model DoAnCnpm.Models.OrderPro
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/Adminlayout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>OrderPro</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DateOrder)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateOrder)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AddressDeliverry)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AddressDeliverry)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NameCusNonAccount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NameCusNonAccount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PhoneCusNonAccount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhoneCusNonAccount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Customer.NameCus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Customer.NameCus)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "QuanLyDonHang")
+        </div>
+    }
+</div>

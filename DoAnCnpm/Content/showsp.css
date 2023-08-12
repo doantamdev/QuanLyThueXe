@@ -1,0 +1,51 @@
+﻿
+#div-ds {
+    text-align: center;
+    background-color: whitesmoke;
+    height: 50px;
+}
+
+#div-ds-2 {
+    background-color: white;
+    height: 20px;
+}
+
+#khungtt {
+    width: 237px;
+    background-color: midnightblue;
+    height: 40px;
+    border: 1px solid blue;
+    padding: 0.5rem;
+    border-radius: 5px;
+    text-align:center;
+     
+}
+
+    #khungtt:hover {
+        background-color: white;
+        color: midnightblue;
+    }
+
+        #khungtt:hover p {
+            color: midnightblue;
+        }
+
+    #khungtt p {
+        color: white;
+        padding: 0.5rem;
+    }
+
+.card-pro a img {
+    display: block;
+    transition: all 0.3s ease-in-out;
+}
+
+.card-pro a {
+    position: relative;
+}
+
+.card-pro:hover img {
+    transform: scale(1.1);
+    opacity: 0.8;
+}
+

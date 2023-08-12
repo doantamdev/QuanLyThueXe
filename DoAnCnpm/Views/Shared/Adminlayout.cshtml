@@ -1,0 +1,293 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <meta charset="utf-8" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/mystyle.css" rel="stylesheet" />
+    <script src="~/Scripts/script.js"></script>
+    <style>
+        p.ridge {
+            border-style: ridge;
+            margin-left: 10px;
+            width: 250px;
+            height: 53px;
+            text-align: center;
+            color: white;
+            border: 2px solid #fff;
+            border-color: white;
+            background-color: black;
+            float: right;
+            margin-bottom: 0PX;
+            padding-top: 14px;
+            margin-top: 0px;
+            font-size: 15px;
+        }
+
+        p.groove {
+            border-style: groove;
+            margin-left: 10px;
+            width: 250px;
+            height: 45px;
+            border: 2px solid #fff;
+            border-color: darkgray;
+            background-color: white;
+            float: right;
+            margin-bottom: 0PX;
+            padding-top: 13px;
+            margin-top: 0px;
+            font-size: 13px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="div-headtop">
+        <div class="logotrai">
+            <a class="">
+                <img src="~/Content/images/loge-headtop3.jpg" style="height:50px; width:100px;float:left;margin-top:10px;margin-left:40px">
+            </a>
+            <a class="">
+                <img src="~/Content/images/thuexelink.jpg" style="height:50px; width:80px;float:left;margin-top:10px;margin-left:20px">
+            </a>
+        </div>
+        <p class="chuheadtop">
+            <span>Nơi Cung Cấp Xe Nhanh - Đẹp - Rẻ-Chất Lượng</span> <br>
+            <span style="font-size:15px">Đưa Bạn Đến Mọi Nẻo Đường</span>
+        </p>
+    </div>
+    <div id="div-top">
+
+        <div class="edittop">
+            <div class="row">
+                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                    <a href="#">
+                        <img src="~/Content/images/miotologo.png" style="height:100%; width:100px;float:left;margin-top:30px;margin-left:120px">
+                    </a>
+                </div>
+                <div class="col-lg-10 col-md-2 col-sm-2 col-xs-12" style="margin-top:10px">
+                    <ul class="nav navbar-nav navbar-right" style="margin-right:30px">
+                        <li><a href="@Url.Action("ITestGD", "Home")"> <b style="color:black">Trang chủ</b></a></li>
+                        <li><a href="@Url.Action("Index", "Product")"><b style="color:black">Xem xe</b></a></li>
+                        <li><a href="#3"><b style="color:black">Liên hệ</b></a></li>
+                        <li style="margin-top:14px">|</li>
+                        @if (Session["ID"] != null)
+                        {
+                            <li>
+                                <a href="@Url.Action("LogOutAdmin", "Admin")"> <span class="glyphicon glyphicon-user" style="color:black"></span><b style="color:black">&nbsp Đăng xuất</b></a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li>
+                                <a href="@Url.Action("RegisterAdmin", "Admin")"><span class="glyphicon glyphicon-user" style="color:black"></span><b style="color:black">&nbsp Đăng ký</b></a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Index", "Admin")" class="double"><span class="glyphicon glyphicon-log-in" style="color:black"></span> <b style="color:black">&nbsp Đăng Nhập Quản trị</b></a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="div-top-end"></div>
+
+
+
+    <div class="container body-content">
+        <div class="row">
+            <div class="col-md-3">
+                <p class="ridge" style="text-align:center;color:white"><b>DANH MỤC</b></p>
+                <ul style="list-style: none">
+                    <li>
+                        <a href="@Url.Action("QuanLyXe", "Product")">
+                            <p class="groove">
+                                <span style="margin-left:5px">Quản lý xe</span>
+                            </p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index", "Role")">
+                            <p class="groove">
+                                <span style="margin-left:5px">Quản lý Role</span>
+                            </p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("QuanLyKhachHang", "Login")">
+                            <p class="groove">
+                                Quản lý khách hàng
+                            </p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("QuanLyDonHang", "ShoppingCart")">
+                            <p class="groove">
+                                Quản lý đơn hàng
+                            </p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("XuatFileExcel", "ShoppingCart")">
+                            <p class="groove">
+                                Xuất File Excel
+                            </p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("GroupByTop3", "OrderDetail")">
+                            <p class="groove">
+                                <span style="margin-left:5px">Xe đạt doanh thu cao nhất</span>
+                            </p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index", "Categories")">
+                            <p class="groove">
+                                <span style="margin-left:5px">Quản lý danh mục xe</span>
+                            </p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index", "Home")">
+                            <p class="groove">
+                                <span style="margin-left:5px">Thống kê theo Quý</span>
+                            </p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index", "ThongKe")">
+                            <p class="groove">
+                                <span style="margin-left:5px">Thống kê số lượng thuê</span>
+                            </p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-9">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+    <div id="div-footer">
+        <div class="row">
+            <div class="col-sm-4">
+                <div id="list-store">
+                    <h4 style="text-align:center; color:aliceblue"><b>Các chi nhánh thuê xe</b></h4>
+                    <div id="format-address">
+                        <ul>
+                            <li>
+                                <img src="~/Content/images/address.png" id="address">
+                                <span id="address-span"><b>TP.HCM - Quận 1:</b> 180 Trần Hưng Đạo P. Nguyễn Cư Trinh</span>
+                            </li>
+                            <li>
+                                <img src="~/Content/images/address.png" id="address">
+                                <span id="address-span"><b>TP.HCM - Quận 1:</b> 37 Lý Tự Trọng, P. Bến Nghé</span>
+                            </li>
+                            <li>
+                                <img src="~/Content/images/address.png" id="address">
+                                <span id="address-span"><b>TP.HCM - Quận 2:</b> 16 Quốc Hương, P.Thảo Điền</span>
+                            </li>
+                            <li>
+                                <img src="~/Content/images/address.png" id="address">
+                                <span id="address-span"><b>TP.HCM - Quận 7:</b> 103A Nguyễn Thị Thập, P. Tân Phú</span>
+                            </li>
+                            <li>
+                                <img src="~/Content/images/address.png" id="address">
+                                <span id="address-span"><b>TP.HCM - Quận 7:</b> 954 Nguyễn Văn Linh, P. Tân Phong</span>
+                            </li>
+                            <li>
+                                <img src="~/Content/images/address.png" id="address">
+                                <span id="address-span"><b>TP.HCM - Quận 7:</b> Lotte Mart 469 Nguyễn Hữu Thọ, P. Tân Phong</span>
+                            </li>
+                            <li>
+                                <img src="~/Content/images/address.png" id="address">
+                                <span id="address-span"><b>TP.HCM - Quận 10:</b> 235-241 Nguyễn Tri Phương, P. 5</span>
+                            </li>
+                            <li>
+                                <img src="~/Content/images/address.png" id="address">
+                                <span id="address-span"><b>TP.HCM - Quận 11:</b> 94 Hòa Bình, P. 5</span>
+                            </li>
+                            <li>
+                                <img src="~/Content/images/address.png" id="address">
+                                <span id="address-span"><b>TP.HCM - Quận Gò Vấp:</b> 1031 Phan Văn Trị, P.10</span>
+                            </li>
+                            <li>
+                                <img src="~/Content/images/address.png" id="address">
+                                <span id="address-span"><b>TP.HCM - Quận Gò Vấp:</b> Lotte Mart 242 Nguyễn Văn Lượng, P.10</span>
+                            </li>
+                            <li>
+                                <img src="~/Content/images/address.png" id="address">
+                                <span id="address-span"><b>TP.HCM - Quận Tân Phú:</b> 367 Tân Sơn Nhì, P.Tân Thành</span>
+                            </li>
+                            <li>
+                                <img src="~/Content/images/address.png" id="address">
+                                <span id="address-span"><b>HÀ NỘI - Quận Tây Hồ:</b> 38 An Dương Vương, Phú Thượng, Tây Hồ</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div id="view-address">
+                        <a href="#">
+                            <div style="text-align: center; color: orangered;">
+                                <b>Xem thêm các địa chỉ khác</b>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div style="text-align: left; color: aliceblue">
+                    <h4>DANH MỤC</h4>
+                    <ul class="a">
+                        <li style="list-style-type: circle">Trang Chủ</li>
+                        <li style="list-style-type: circle">Thuê ngay</li>
+                        <li style="list-style-type: circle">Khuyến Mãi</li>
+                        <li style="list-style-type: circle">Tuyển dụng</li>
+                        <li style="list-style-type: circle">Liên hệ</li>
+                        <li style="list-style-type: circle">Giới thiệu</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div style="text-align: left; color: aliceblue">
+                    <h4 style="margin-top:10px">CHĂM SÓC KHÁCH HÀNG</h4>
+                    <ul class="a">
+                        <li style="list-style-type: circle;">Hoàn tất thủ tục trong 15 phút</li>
+                        <li style="list-style-type: circle">Chính sách nhanh - tiện</li>
+                        <li style="list-style-type: circle">Chính sách về bảo mật thông tin</li>
+                        <li style="list-style-type: circle">Chính sách khách hàng thân thiết</li>
+                        <li style="list-style-type: circle">Phương thức thanh toán</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div style="text-align:left ;color: aliceblue">
+                    <h4>KẾT NỐI VỚI CHÚNG TÔI NGAY</h4>
+                </div>
+                <p>
+                    <a href="#">
+                        <img src="~/Content/images/thuexelink.jpg" style="width:300px;height:300px;float:left">
+                    </a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+    @RenderSection("scripts", false)
+</body>
+</html>

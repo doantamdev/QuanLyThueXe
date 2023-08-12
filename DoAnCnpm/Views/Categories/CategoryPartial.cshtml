@@ -1,0 +1,42 @@
+﻿@model IEnumerable<DoAnCnpm.Models.Category>
+
+<style>
+    #div-u {
+        padding-top: 30px;
+        margin-top: 20px;
+        background-color: cornflowerblue;
+        text-decoration: none;
+    }
+
+    .div-cate {
+        height: 30px;
+        width: 100%;
+    }
+
+        .div-cate a {
+            color: yellow;
+            text-decoration: none;
+            font-size: large;
+        }
+
+            .div-cate a:hover {
+                color: chartreuse;
+                text-decoration: none;
+            }
+</style>
+<br />
+<h3 style="color:darkred; text-align:center;">Danh mục Loại SP</h3>
+<ul style="list-style-type:none" id="div-u">
+    @{ 
+        foreach(var item in Model)
+            {
+                <li class="div-cate">
+                    @Html.ActionLink(item.NameCate, "Index", "Product", new { category = item.NameCate.Trim()},"")
+                </li>
+                <hr />
+            }
+    }
+</ul>
+
+
+

@@ -1,0 +1,11 @@
+﻿@model IEnumerable<DoAnCnpm.Models.Category>
+
+
+<div>
+    <ul class="list-group">
+        @foreach (var item in Model)
+        {
+            @Html.ActionLink(item.NameCate, "GetProductsByCateId", "Product", new { id = item.Id }, new { @class = "list-group-item" })
+        }
+    </ul>
+</div>
