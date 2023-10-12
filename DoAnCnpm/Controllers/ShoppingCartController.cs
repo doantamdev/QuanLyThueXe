@@ -1,6 +1,8 @@
 ﻿using DoAnCnpm.Models;
+using DoAnCnpm.Models.Payment;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Globalization;
 using System.Linq;
 using System.Net;
@@ -11,20 +13,20 @@ namespace DoAnCnpm.Controllers
 {
     public class ShoppingCartController : Controller
     {
-        DoAnCNPMEntities database = new DoAnCNPMEntities();
+        DoAnPMEntities database = new DoAnPMEntities();
         // GET: ShoppingCart
         public ActionResult Index()
         {
             return View();
         }
 
-        public ActionResult ShowCart()
+    /*    public ActionResult ShowCart()
         {
             if (Session["Cart"] == null)
                 return View("EmptyCart");
             Cart item = Session["Cart"] as Cart;
             return View(item);
-        }
+        }*/
 
         //Action Tạo mới giỏ hàng
         public Cart GetCart()
@@ -91,7 +93,7 @@ namespace DoAnCnpm.Controllers
                 //Bảng hoá đơn sản phẩm
                 OrderPro order = new OrderPro();
                 order.DateOrder = DateTime.Now;
-                //order.DateGiveBack = DateTime.ParseExact(form["DateTra"], "yyyy-MM-dd", CultureInfo.InvariantCulture);
+                //order.OrderDate = DateTime.ParseExact(form["DateTra"], "yyyy-MM-dd", CultureInfo.InvariantCulture);
                 order.AddressDeliverry = form["AddressDelivery"];
                 order.IDCus = int.Parse(form["CodeCustomer"]);
                 order.TypePayment = 1;
@@ -207,6 +209,94 @@ namespace DoAnCnpm.Controllers
             }
             return Json(new { message = "Unsuccess", Success = false });
         }
+        private decimal CalculateDiscountAmount(string voucherCode)
+        {
+            // Sử dụng đối tượng DoAnCNPMEntities để truy vấn cơ sở dữ liệu và tính toán giảm giá dựa trên mã voucher
+            Voucher voucher = database.Vouchers.FirstOrDefault(v => v.Code == voucherCode);
+
+            if (voucher != null)
+            {
+                // Trả về giá trị giảm giá dựa trên thông tin voucher
+                return voucher.DiscountAmount;
+            }
+
+            // Trả về null nếu không tìm thấy mã voucher hoặc không có giảm giá
+            return 0;
+        }
+
+        public ActionResult ShowCart(string vouncher)
+        {
+            if (Session["Cart"] == null)
+                return View("EmptyCart");
+            // Lấy đối tượng giỏ hàng từ session
+            Cart cart = Session["Cart"] as Cart;
+            if (cart == null)
+            {
+                // Xử lý trường hợp giỏ hàng rỗng
+                // Trả về view thông báo hoặc làm điều gì đó khác tùy theo yêu cầu của bạn
+            }
+
+            // Xử lý mã voucher và tính toán giảm giá dựa trên mã voucher (vouncher)
+            decimal discountAmount = CalculateDiscountAmount(vouncher);
+
+            // Áp dụng giảm giá cho từng sản phẩm trong giỏ hàng
+            foreach (var item in cart.Items)
+            {
+                item.product.Price -= discountAmount;
+            }
+
+            // Lưu lại giỏ hàng đã cập nhật vào session
+            Session["Cart"] = cart;
+
+            // Tính tổng tiền sau khi áp dụng giảm giá
+
+            // Trả về view hiển thị giỏ hàng với giảm giá và tổng tiền đã áp dụng
+            ViewBag.DiscountAmount = discountAmount;
+
+            return View(cart);
+        }
+
+
+        #region Thanh toán vnpay
+        public ActionResult VnPayPayment(string orderCode, decimal amount)
+        {
+            // Lấy thông tin đơn hàng và tạo URL thanh toán VNPAY
+            string urlPayment = UrlPayment(orderCode, amount);
+
+            // Chuyển hướng người dùng đến trang thanh toán VNPAY
+            return Redirect(urlPayment);
+        }
+
+        private string UrlPayment(string orderCode, decimal amount)
+        {
+            // Lấy thông tin cấu hình từ appSettings hoặc config
+            string vnp_Returnurl = ConfigurationManager.AppSettings["vnp_Returnurl"];
+            string vnp_Url = ConfigurationManager.AppSettings["vnp_Url"];
+            string vnp_TmnCode = ConfigurationManager.AppSettings["vnp_TmnCode"];
+            string vnp_HashSecret = ConfigurationManager.AppSettings["vnp_HashSecret"];
+
+            // Tạo và trả về URL thanh toán VNPAY dựa trên thông tin đơn hàng và cấu hình
+            // Khởi tạo đối tượng VnPayLibrary
+            VnPayLibrary vnpay = new VnPayLibrary();
+
+            // Điền thông tin đơn hàng vào đối tượng VnPayLibrary
+            vnpay.AddRequestData("vnp_Version", VnPayLibrary.VERSION);
+            vnpay.AddRequestData("vnp_Command", "pay");
+            vnpay.AddRequestData("vnp_TmnCode", vnp_TmnCode);
+            vnpay.AddRequestData("vnp_Amount", (amount * 100).ToString()); // Chuyển số tiền sang định dạng của VNPAY (phải nhân 100)
+
+            // Điền các thông tin khác của đơn hàng
+            vnpay.AddRequestData("vnp_ReturnUrl", vnp_Returnurl);
+            vnpay.AddRequestData("vnp_TxnRef", orderCode);
+
+            // Tạo URL thanh toán dựa trên thông tin đã điền
+            string urlPayment = vnpay.CreateRequestUrl(vnp_Url, vnp_HashSecret);
+
+            return urlPayment;
+        }
+
+        #endregion
+
 
     }
-}
+} 

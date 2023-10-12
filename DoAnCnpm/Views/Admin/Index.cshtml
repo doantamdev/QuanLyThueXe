@@ -1,4 +1,4 @@
-﻿@model DoAnCnpm.Models.AdminUser
+﻿@model DoAnCnpm.Models.Admin
 
 @{
     ViewBag.Title = "Index";
@@ -17,14 +17,14 @@
     @Html.AntiForgeryToken()
     <table>
         <tr>
-            <td>@Html.LabelFor(model => model.NameUser)</td>
-            <td>@Html.TextBoxFor(model => model.NameUser, new { style = "field-validation-error" })</td>
-            <td>@Html.ValidationMessageFor(model => model.NameUser)</td>
+            <td>@Html.LabelFor(model => model.Username)</td>
+            <td>@Html.TextBoxFor(model => model.Username, new { style = "field-validation-error" })</td>
+            <td>@Html.ValidationMessageFor(model => model.Username)</td>
         </tr>
         <tr>
-            <td>@Html.LabelFor(model => model.PasswordUser)</td>
-            <td>@Html.PasswordFor(model => model.PasswordUser)</td>
-            <td>@Html.ValidationMessageFor(model => model.PasswordUser)</td>
+            <td>@Html.LabelFor(model => model.Password)</td>
+            <td>@Html.PasswordFor(model => model.Password)</td>
+            <td>@Html.ValidationMessageFor(model => model.Password)</td>
             @if (ViewBag.ErrorInfo== null)
             {
                 <p> ViewBag.ErrorInfo </p>

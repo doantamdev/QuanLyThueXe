@@ -11,12 +11,13 @@ using PagedList.Mvc;
 using System.Net;
 using System.Drawing.Printing;
 using System.Runtime.InteropServices;
+using DoAnCnpm.Models.CommentViewModal;
 
 namespace DoAnCnpm.Controllers
 {
     public class ProductController : Controller
     {
-        DoAnCNPMEntities database = new DoAnCNPMEntities();
+        DoAnPMEntities database = new DoAnPMEntities();
         // GET: Product
         public ActionResult Index(string _name, int? page, decimal min = decimal.MinValue, decimal max = decimal.MaxValue)
         {
@@ -142,11 +143,55 @@ namespace DoAnCnpm.Controllers
                HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Product product = database.Products.Find(id);
+
             if (product == null)
             {
                 return HttpNotFound();
             }
+
             return View(product);
+        }
+        public ActionResult ProductDetails(int id)
+        {
+            // Lấy thông tin sản phẩm từ database và truyền nó đến View
+            Product product = database.Products.Find(id);
+            return View(product);
+        }
+
+        [HttpPost]
+        public ActionResult AddComment(CommentViewModel comment)
+        {
+            if (ModelState.IsValid)
+            {
+                // Lấy giá trị UserName từ phiên làm việc
+                var userName = Session["UserCus"] as string;
+
+                // Lấy giá trị UserID (IDCus) từ phiên làm việc
+                //var userID = Session["IDCus"] as int?; 
+
+                    Comment newComment = new Comment
+                    {
+                        CommentMsg = comment.CommentMsg,
+                        CommentDate = DateTime.Now,
+                        XeId = comment.ProductID,
+                        UserName = userName,
+                        UserID = comment.UserID, // Set the UserID with the value from the session
+                        Rate = comment.Rate
+                    };
+                    database.Comments.Add(newComment);
+                    database.SaveChanges();
+                
+            }
+
+            return RedirectToAction("Details", new { id = comment.ProductID });
+        }
+
+
+
+        public ActionResult GetComments(int productId)
+        {
+            var comments = database.Comments.Where(c => c.XeId == productId).ToList();
+            return PartialView("_CommentsPartial", comments);
         }
 
 

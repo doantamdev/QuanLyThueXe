@@ -5,12 +5,12 @@
     Layout = "~/Views/Shared/TrangDatXe.cshtml";
 }
 
-<<div style="margin: 10px auto; width: 70%;margin-bottom:45px;">
+<div style="margin: 10px auto; width: 70%; margin-bottom: 45px;">
     <h2 style="text-align: center">CHI TIẾT SẢN PHẨM</h2>
     <hr />
     <div class="row">
         <div class="col-md-4">
-            <img style="width: 200px;height:250px" src="@Url.Content(Model.ImagePro)">
+            <img style="width: 200px; height: 250px" src="@Url.Content(Model.ImagePro)">
         </div>
         <div class="col-md-6">
             <h4>Tên sản phẩm: @Model.NamePro</h4>
@@ -18,17 +18,104 @@
                 <span style="font-weight: bold">Mô tả:</span> @Model.DecriptionPro
             </p>
             <p class="price">
-                Giá bán: <span style="color:red; font-size:24px;">
-                    @Model.Price
-                    VNĐ
+                Giá bán: <span style="color: red; font-size: 24px;">
+                    @Model.Price VNĐ
                 </span>
             </p>
-            <div id="khungtt" style="margin-bottom:5px">
+            <div id="khungtt" style="margin-bottom: 5px">
                 <a href="/ShoppingCart/AddToCart/@Model.ProductID">
-                    <p style="box-sizing:border-box; text-align:center; margin-top:10px;" ><b>CHỌN MUA</b></p>
+                    <p style="box-sizing: border-box; text-align: center; margin-top: 10px;"><b>CHỌN MUA</b></p>
                 </a>
             </div>
         </div>
     </div>
+    <div id="comment-section">
+        <h3>Bình luận và đánh giá sản phẩm</h3>
+        @if (Session["IDCus"] != null)
+        {
+            <form id="comment-form">
+                @Html.HiddenFor(model => model.ProductID)
+                <div class="form-group">
+                    <label for="comment">Bình luận:</label>
+                    <textarea class="form-control" id="comment" name="CommentMsg"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="rate">Đánh giá:</label>
+                    <input type="number" class="form-control" id="rate" name="Rate" min="1" max="5">
+                </div>
+                <p>Tên của bạn: @Session["UserCus"]</p> <!-- Hiển thị tên người dùng từ Session -->
+                <button type="button" class="btn btn-primary" onclick="submitComment()">Gửi</button>
+            </form>
+        }
+        else
+        {
+            <p>Vui lòng <a href="@Url.Action("Authen", "Login")">đăng nhập</a> hoặc <a href="@Url.Action("Register", "Login")">đăng ký</a> để bình luận sản phẩm.</p>
+        }
+        <div id="comment-list">
+            <!-- Danh sách bình luận và đánh giá sẽ được cập nhật ở đây -->
+        </div>
+    </div>
+
+
 </div>
 
+<script>
+    function submitComment() {
+    var productId = $("#ProductID").val();
+    var commentMsg = $("#comment").val();
+    var rate = $("#rate").val();
+    var userName = '@Session["UserCus"]';
+    var userID = '@Session["IDCus"]'; 
+
+    // Gửi dữ liệu lên máy chủ
+    $.ajax({
+        url: "/Product/AddComment",
+        type: "POST",
+        data: {
+            ProductID: productId,
+            CommentMsg: commentMsg,
+            Rate: rate,
+            UserName: userName,
+            UserID: userID, 
+        },
+        success: function () {
+            // Xóa nội dung của các trường sau khi gửi thành công
+            $("#comment").val("");
+            $("#rate").val("");
+
+            // Cập nhật danh sách bình luận và đánh giá
+            loadComments(productId);
+        },
+        error: function (xhr, status, error) {
+            // Hiển thị thông báo lỗi từ phản hồi máy chủ
+            var errorMessage = "Có lỗi xảy ra khi gửi bình luận";
+            alert(errorMessage);
+        }
+    });
+}
+
+
+
+
+    function loadComments(productId) {
+        // Gửi yêu cầu lấy danh sách bình luận và đánh giá
+        $.ajax({
+            url: "/Product/GetComments", // Đặt URL phù hợp với đường dẫn của phương thức trong Controller
+            type: "GET",
+            data: {
+                productId: productId
+            },
+            success: function (data) {
+                // Cập nhật danh sách bình luận và đánh giá
+                $("#comment-list").html(data);
+            },
+            error: function () {
+                console.log("Có lỗi xảy ra khi tải danh sách bình luận.");
+            }
+        });
+    }
+
+    // Gọi hàm để hiển thị danh sách bình luận khi trang được tải
+    var productId = $("#ProductID").val();
+    loadComments(productId);
+</script>

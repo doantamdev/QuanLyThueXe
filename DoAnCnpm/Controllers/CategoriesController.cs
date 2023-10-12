@@ -9,7 +9,7 @@ namespace DoAnCnpm.Controllers
 {
     public class CategoriesController : Controller
     {
-        DoAnCNPMEntities database = new DoAnCNPMEntities();
+        DoAnPMEntities database = new DoAnPMEntities();
 
         // GET: Categories
         public ActionResult Create()

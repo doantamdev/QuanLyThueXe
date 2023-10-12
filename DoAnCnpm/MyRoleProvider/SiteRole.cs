@@ -38,12 +38,12 @@ namespace DoAnCnpm.MyRoleProvider
 
         public override string[] GetRolesForUser(string username)
         {
-            using (var db = new DoAnCNPMEntities())
+            using (var db = new DoAnPMEntities())
             {
-                var user = db.AdminUsers.FirstOrDefault(x => x.NameUser == username);
+                var user = db.Admins.FirstOrDefault(x => x.Username == username);
                 if (user != null)
                 {
-                    return new[] { user.RoleUser };
+                    return new string[0];
                 }
             }
             return new string[0];

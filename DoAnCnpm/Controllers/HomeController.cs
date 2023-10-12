@@ -10,7 +10,7 @@ namespace DoAnCnpm.Controllers
 {
     public class HomeController : Controller
     {
-        DoAnCNPMEntities context = new DoAnCNPMEntities();
+        DoAnPMEntities context = new DoAnPMEntities();
         public ActionResult Index()
         {
             return View();
@@ -62,18 +62,18 @@ namespace DoAnCnpm.Controllers
             return View();
         }
 
-        public ActionResult GetData()
+     /*   public ActionResult GetData()
         {
-            int thang6 = context.HighCharts.Where(x => x.ThoiGian == "Thang6").Count();
+          *//*  int thang6 = context.HighCharts.Where(x => x.ThoiGian == "Thang6").Count();
             int thang7 = context.HighCharts.Where(x => x.ThoiGian == "Thang7").Count();
-            int thang8 = context.HighCharts.Where(x => x.ThoiGian == "Thang8").Count();
+            int thang8 = context.HighCharts.Where(x => x.ThoiGian == "Thang8").Count();*//*
             Ratio obj = new Ratio();
             obj.Thang6 = thang6;
             obj.Thang7 = thang7;
-            obj.Thang8 = thang8;
+            obj.Thang8 = thang8;*//*
 
-            return Json(obj, JsonRequestBehavior.AllowGet);
-        }
+            return Json(obj, JsonRequestBehavior.AllowGet);*//*
+        }*/
         public class Ratio
         {
             public int Thang6 { get; set; }

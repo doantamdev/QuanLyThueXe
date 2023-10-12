@@ -6,11 +6,11 @@ namespace DoAnCnpm.Controllers
 {
     public class ThongKeController : Controller
     {
-        private readonly DoAnCNPMEntities context;
+        private readonly DoAnPMEntities context;
 
         public ThongKeController()
         {
-            context = new DoAnCNPMEntities();
+            context = new DoAnPMEntities();
         }
 
         protected override void Dispose(bool disposing)

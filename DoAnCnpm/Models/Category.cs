@@ -24,10 +24,10 @@ namespace DoAnCnpm.Models
         public int Id { get; set; }
         public string IDCate { get; set; }
         public string NameCate { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Product> Products { get; set; }
         [NotMapped]
         public List<Category> ListCate { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Product> Products { get; set; }
     }
 }

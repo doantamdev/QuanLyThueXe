@@ -1,4 +1,4 @@
-﻿@model DoAnCnpm.Models.AdminUser
+﻿@model DoAnCnpm.Models.Admin
 
 @{
     ViewBag.Title = "RegisterAdmin";
@@ -18,27 +18,24 @@
 }))
 {
     @Html.AntiForgeryToken()
-    <p>@Html.LabelFor(model => model.ID)</p>
-    <p>@Html.EditorFor(model => model.ID)</p>
-    <p>@Html.ValidationMessageFor(model => model.ID)</p>
 
     if (ViewBag.ErrorRegister != null)
     {
         <p>@ViewBag.ErrorRegister</p>
     }
 
-    <p>@Html.LabelFor(model => model.NameUser)</p>
-    <p>@Html.EditorFor(model => model.NameUser)</p>
-    <p>@Html.ValidationMessageFor(model => model.NameUser)</p>
+    <p>@Html.LabelFor(model => model.Username)</p>
+    <p>@Html.EditorFor(model => model.Username)</p>
+    <p>@Html.ValidationMessageFor(model => model.Username)</p>
 
-    <p>@Html.LabelFor(model => model.RoleUser)</p>
-    <p>@Html.EditorFor(model => model.RoleUser)</p>
-    <p>@Html.ValidationMessageFor(model => model.RoleUser)</p>
+    <p>@Html.LabelFor(model => model.UserRoleMappings)</p>
+    <p>@Html.EditorFor(model => model.UserRoleMappings)</p>
+    <p>@Html.ValidationMessageFor(model => model.UserRoleMappings)</p>
 
 
-    <p>@Html.LabelFor(model => model.PasswordUser)</p>
-    <p>@Html.EditorFor(model => model.PasswordUser)</p>
-    <p>@Html.ValidationMessageFor(model => model.PasswordUser)</p>
+    <p>@Html.LabelFor(model => model.Password)</p>
+    <p>@Html.EditorFor(model => model.Password)</p>
+    <p>@Html.ValidationMessageFor(model => model.Password)</p>
 
 
 

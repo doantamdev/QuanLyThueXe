@@ -18,15 +18,16 @@ namespace DoAnCnpm.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Customer()
         {
+            this.Comments = new HashSet<Comment>();
             this.OrderProes = new HashSet<OrderPro>();
         }
-
+        public int UserID { get; set; }
         public int IDCus { get; set; }
         [Required(ErrorMessage = "Vui long nhap ten!")]
         public string NameCus { get; set; }
         [Required(ErrorMessage = "Vui long nhap ten dang nhap!")]
         public string UserCus { get; set; }
-        [RegularExpression(@"[A-Za-z-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}")]
+        //[RegularExpression(@"[A-Za-z-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}")]
         [Required(ErrorMessage = "Vui long nhap email!")]
 
         public string EmailCus { get; set; }
@@ -43,6 +44,8 @@ namespace DoAnCnpm.Models
         public string ConfirmPassCus { get; set; }
         public string LoginErrorMessage { get; set; }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Comment> Comments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderPro> OrderProes { get; set; }
     }

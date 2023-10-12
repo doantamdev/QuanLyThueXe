@@ -73,6 +73,18 @@
             <tr>
                 <td colspan="2"></td>
                 <td colspan="4">
+                    @using (Html.BeginForm("ShowCart", "ShoppingCart", FormMethod.Get))
+                    {
+                        <table>
+                            <tr>
+                                <td>
+                                    &nbsp; Giảm giá: <input type="text" name="vouncher" />
+                                    <input type="submit" value="Giảm giá" />
+                                </td>
+                            </tr>
+                        </table>
+                    }
+      
                     @using (Html.BeginForm("CheckOut", "ShoppingCart"))
                     {
                         <table style="border-collapse:separate;border-spacing:5px;">
@@ -102,6 +114,17 @@
 
                         </table>
                     }
+                </td>
+                <td>
+  
+                    <form id="vnpay-form" action="@Url.Action("VnPayPayment", "ShoppingCart")" method="post">
+                        <!-- Thông tin đơn hàng -->
+                        <input type="hidden" name="orderCode" value="@Model.OrderCode">
+                        <input type="hidden" name="amount" value="@Model.Total_money()">
+
+                        <button type="submit" id="btn-pay">Thanh toán bằng VNPAY</button>
+                    </form>
+
                 </td>
             </tr>
         </tfoot>

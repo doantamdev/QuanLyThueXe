@@ -9,8 +9,8 @@ namespace DoAnCnpm.Models
 {
     public class Cart
     {
-       
 
+        public int OrderCode { get; set; }
 
         List<CartItem> items = new List<CartItem>();
         public IEnumerable<CartItem> Items
@@ -23,6 +23,8 @@ namespace DoAnCnpm.Models
             public Product product { get; set; }
             public int quantity { get; set; }
             public DateTime NgayTra { get; set; }
+
+            public int Total_AllSP { get; set; }
 
         }
         public void Add_Product_Cart(Product add, int soluong = 1)
@@ -72,5 +74,6 @@ namespace DoAnCnpm.Models
         {
             items.Clear();
         }
+      
     }
 }

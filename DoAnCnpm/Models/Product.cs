@@ -19,8 +19,9 @@ namespace DoAnCnpm.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Product()
         {
+            this.Comments = new HashSet<Comment>();
             this.OrderDetails = new HashSet<OrderDetail>();
-            ImagePro = "~/Content/images/xelambor.jpg";
+            ImagePro = "/Content/images/xewave.jpg";
         }
     
         public int ProductID { get; set; }
@@ -28,17 +29,18 @@ namespace DoAnCnpm.Models
         public string DecriptionPro { get; set; }
         public string Category { get; set; }
         public Nullable<decimal> Price { get; set; }
-        public Nullable<decimal> PriceGoc { get; set; }
         public string ImagePro { get; set; }
         public string MauXe { get; set; }
         public string Vitri { get; set; }
         public Nullable<int> Quantity { get; set; }
-    
-        public virtual Category Category1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+        public Nullable<int> IsGiveBack { get; set; }
         [NotMapped]
         public HttpPostedFileBase UploadImage { get; set; }
+
+        public virtual Category Category1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Comment> Comments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }
-

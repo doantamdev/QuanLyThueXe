@@ -137,57 +137,72 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
+    <Compile Include="Controllers\CommentController.cs" />
+    <Compile Include="Controllers\GetIDCusController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\OrderDetailController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
-    <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Controllers\ThongKeController.cs" />
+    <Compile Include="Controllers\VouncherController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AdminUser.cs">
-      <DependentUpon>EntitiesDB.tt</DependentUpon>
+    <Compile Include="Models\Admin.cs">
+      <DependentUpon>DoanPMEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\Category.cs">
-      <DependentUpon>EntitiesDB.tt</DependentUpon>
+      <DependentUpon>DoanPMEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Comment.cs">
+      <DependentUpon>DoanPMEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CommentViewModal\CommentDao.cs" />
+    <Compile Include="Models\CommentViewModal\CommentViewModel.cs" />
+    <Compile Include="Models\CommentViewModal\CommonConstants.cs" />
     <Compile Include="Models\Customer.cs">
-      <DependentUpon>EntitiesDB.tt</DependentUpon>
+      <DependentUpon>DoanPMEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\EntitiesDB.Context.cs">
+    <Compile Include="Models\DoanPMEntities.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>EntitiesDB.Context.tt</DependentUpon>
+      <DependentUpon>DoanPMEntities.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\EntitiesDB.cs">
+    <Compile Include="Models\DoanPMEntities.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>EntitiesDB.tt</DependentUpon>
+      <DependentUpon>DoanPMEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\EntitiesDB.Designer.cs">
+    <Compile Include="Models\DoanPMEntities.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>EntitiesDB.edmx</DependentUpon>
+      <DependentUpon>DoanPMEntities.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\HighChart.cs">
-      <DependentUpon>EntitiesDB.tt</DependentUpon>
+      <DependentUpon>DoanPMEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\OrderDetail.cs">
-      <DependentUpon>EntitiesDB.tt</DependentUpon>
+      <DependentUpon>DoanPMEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\OrderPro.cs">
-      <DependentUpon>EntitiesDB.tt</DependentUpon>
+      <DependentUpon>DoanPMEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Payment\VnPayLibrary.cs" />
     <Compile Include="Models\Product.cs">
-      <DependentUpon>EntitiesDB.tt</DependentUpon>
+      <DependentUpon>DoanPMEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Role.cs">
-      <DependentUpon>EntitiesDB.tt</DependentUpon>
+      <DependentUpon>DoanPMEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserRoleMapping.cs">
+      <DependentUpon>DoanPMEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ViewModel.cs" />
+    <Compile Include="Models\Voucher.cs">
+      <DependentUpon>DoanPMEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="MyRoleProvider\SiteRole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -270,23 +285,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\EntitiesDB.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>EntitiesDB.edmx</DependentUpon>
-      <LastGenOutput>EntitiesDB.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\EntitiesDB.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>EntitiesDB.edmx</DependentUpon>
-      <LastGenOutput>EntitiesDB.cs</LastGenOutput>
-    </Content>
-    <EntityDeploy Include="Models\EntitiesDB.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>EntitiesDB.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\EntitiesDB.edmx.diagram">
-      <DependentUpon>EntitiesDB.edmx</DependentUpon>
-    </Content>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -295,6 +293,16 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Models\DoanPMEntities.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DoanPMEntities.edmx</DependentUpon>
+      <LastGenOutput>DoanPMEntities.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\DoanPMEntities.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DoanPMEntities.edmx</DependentUpon>
+      <LastGenOutput>DoanPMEntities.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap-datetimepicker.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -302,6 +310,13 @@
     <Content Include="Scripts\chart\exporting.js" />
     <Content Include="Scripts\chart\highcharts.js" />
     <Content Include="Scripts\CustomScript.js" />
+    <EntityDeploy Include="Models\DoanPMEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DoanPMEntities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\DoanPMEntities.edmx.diagram">
+      <DependentUpon>DoanPMEntities.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -376,15 +391,18 @@
     <Content Include="Views\ShoppingCart\Details.cshtml" />
     <Content Include="Views\OrderDetail\GroupByTop3.cshtml" />
     <Content Include="Views\ThongKe\Index.cshtml" />
-    <Content Include="Views\Role\Create.cshtml" />
-    <Content Include="Views\Role\Details.cshtml" />
-    <Content Include="Views\Role\Edit.cshtml" />
-    <Content Include="Views\Role\Delete.cshtml" />
-    <Content Include="Views\Role\Index.cshtml" />
     <Content Include="Views\ShoppingCart\XuatFileExcel.cshtml" />
+    <Content Include="Views\Voucher\Index.cshtml" />
+    <Content Include="Views\Voucher\Create.cshtml" />
+    <Content Include="Views\Voucher\Edit.cshtml" />
+    <Content Include="Views\Product\_CommentsPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Comment\" />
+    <Folder Include="Views\GetIDCus\" />
+    <Folder Include="Views\test\" />
+    <Folder Include="Views\Vouncher\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

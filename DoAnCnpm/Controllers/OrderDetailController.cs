@@ -9,7 +9,7 @@ namespace DoAnCnpm.Controllers
 {
     public class OrderDetailController : Controller
     {
-        DoAnCNPMEntities database = new DoAnCNPMEntities();
+        DoAnPMEntities database = new DoAnPMEntities();
         // GET: OrderDetail
         public ActionResult GroupByTop3()
         {

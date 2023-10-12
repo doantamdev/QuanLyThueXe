@@ -10,7 +10,7 @@ namespace DoAnCnpm.Controllers
     public class LoginController : Controller
     {
         // GET: Login
-        DoAnCNPMEntities database = new DoAnCNPMEntities();
+        DoAnPMEntities database = new DoAnPMEntities();
         public ActionResult Index()
         {
             return View();
@@ -24,19 +24,26 @@ namespace DoAnCnpm.Controllers
         [HttpPost]
         public ActionResult Authen(Customer customer)
         {
-            var check = database.Customers.Where(s => s.UserCus.Equals(customer.UserCus)&& s.PassCus.Equals(customer.PassCus)).FirstOrDefault();
+            var check = database.Customers.Where(s => s.UserCus.Equals(customer.UserCus) &&
+            s.PassCus.Equals(customer.PassCus)).FirstOrDefault();
             if (check == null)
             {
-                customer.LoginErrorMessage ="UserCus or Password wrong, Please try again!";
+                customer.LoginErrorMessage = "UserCus or Password wrong, Please try again!";
                 return View("Index", customer);
             }
             else
             {
-                Session["IDCus"]=customer.IDCus;
+                Session["IDCus"] = customer.IDCus;
                 Session["UserCus"] = customer.UserCus;
+
+                // Gán UserID cho người dùng
+                customer.UserID = (int)Session["IDCus"];
+
                 return RedirectToAction("Index", "Product");
             }
         }
+
+
         [HttpGet]
         public ActionResult Register()
         {
@@ -53,16 +60,26 @@ namespace DoAnCnpm.Controllers
                     database.Configuration.ValidateOnSaveEnabled = false;
                     database.Customers.Add(customer);
                     database.SaveChanges();
-                    return RedirectToAction("Index","Product");
+
+                    // Gán UserID cho người dùng
+                    customer.UserID = customer.IDCus;
+
+                    // Lưu thông tin người dùng vào phiên làm việc
+                    Session["IDCus"] = customer.IDCus;
+                    Session["UserCus"] = customer.UserCus;
+
+                    return RedirectToAction("Index", "Product");
                 }
                 else
                 {
-                    ViewBag.error = "Username already exists!Use another please";
+                    ViewBag.error = "Username already exists! Use another please";
                     return View();
                 }
             }
             return View();
         }
+
+
         public ActionResult LogOut()
         {
             Session.Abandon();
