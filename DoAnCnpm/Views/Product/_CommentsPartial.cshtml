@@ -1,0 +1,23 @@
+﻿@model List<DoAnCnpm.Models.Comment>
+
+@if (Model != null && Model.Count > 0)
+{
+    <ul>
+        @foreach (var comment in Model)
+        {
+            <li>
+                <strong>Tên người dùng:</strong> @comment.UserName
+            </li>
+            <li>
+                <strong>Nội dung bình luận:</strong> @comment.CommentMsg
+            </li>
+            <li>
+                <strong>Đánh giá:</strong> @comment.Rate
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>Không có bình luận nào.</p>
+}
