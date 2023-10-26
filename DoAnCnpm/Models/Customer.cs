@@ -21,7 +21,6 @@ namespace DoAnCnpm.Models
             this.Comments = new HashSet<Comment>();
             this.OrderProes = new HashSet<OrderPro>();
         }
-        public int UserID { get; set; }
         public int IDCus { get; set; }
         [Required(ErrorMessage = "Vui long nhap ten!")]
         public string NameCus { get; set; }

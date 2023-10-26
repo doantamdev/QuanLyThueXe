@@ -221,7 +221,7 @@ namespace DoAnCnpm.Controllers
             }
 
             // Trả về null nếu không tìm thấy mã voucher hoặc không có giảm giá
-            return 0;
+            return -1;
         }
 
         public ActionResult ShowCart(string vouncher)
@@ -239,6 +239,13 @@ namespace DoAnCnpm.Controllers
             // Xử lý mã voucher và tính toán giảm giá dựa trên mã voucher (vouncher)
             decimal discountAmount = CalculateDiscountAmount(vouncher);
 
+            // Kiểm tra nếu giá trị discountAmount là -1, hiển thị thông báo không tìm thấy voucher
+            if (discountAmount == -1)
+            {
+                ViewBag.VoucherMessage = "Không tìm thấy voucher.";
+                return View(cart);
+            }
+
             // Áp dụng giảm giá cho từng sản phẩm trong giỏ hàng
             foreach (var item in cart.Items)
             {
@@ -255,47 +262,6 @@ namespace DoAnCnpm.Controllers
 
             return View(cart);
         }
-
-
-        #region Thanh toán vnpay
-        public ActionResult VnPayPayment(string orderCode, decimal amount)
-        {
-            // Lấy thông tin đơn hàng và tạo URL thanh toán VNPAY
-            string urlPayment = UrlPayment(orderCode, amount);
-
-            // Chuyển hướng người dùng đến trang thanh toán VNPAY
-            return Redirect(urlPayment);
-        }
-
-        private string UrlPayment(string orderCode, decimal amount)
-        {
-            // Lấy thông tin cấu hình từ appSettings hoặc config
-            string vnp_Returnurl = ConfigurationManager.AppSettings["vnp_Returnurl"];
-            string vnp_Url = ConfigurationManager.AppSettings["vnp_Url"];
-            string vnp_TmnCode = ConfigurationManager.AppSettings["vnp_TmnCode"];
-            string vnp_HashSecret = ConfigurationManager.AppSettings["vnp_HashSecret"];
-
-            // Tạo và trả về URL thanh toán VNPAY dựa trên thông tin đơn hàng và cấu hình
-            // Khởi tạo đối tượng VnPayLibrary
-            VnPayLibrary vnpay = new VnPayLibrary();
-
-            // Điền thông tin đơn hàng vào đối tượng VnPayLibrary
-            vnpay.AddRequestData("vnp_Version", VnPayLibrary.VERSION);
-            vnpay.AddRequestData("vnp_Command", "pay");
-            vnpay.AddRequestData("vnp_TmnCode", vnp_TmnCode);
-            vnpay.AddRequestData("vnp_Amount", (amount * 100).ToString()); // Chuyển số tiền sang định dạng của VNPAY (phải nhân 100)
-
-            // Điền các thông tin khác của đơn hàng
-            vnpay.AddRequestData("vnp_ReturnUrl", vnp_Returnurl);
-            vnpay.AddRequestData("vnp_TxnRef", orderCode);
-
-            // Tạo URL thanh toán dựa trên thông tin đã điền
-            string urlPayment = vnpay.CreateRequestUrl(vnp_Url, vnp_HashSecret);
-
-            return urlPayment;
-        }
-
-        #endregion
 
 
     }

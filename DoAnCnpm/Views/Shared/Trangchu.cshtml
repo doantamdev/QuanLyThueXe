@@ -15,10 +15,10 @@
 <body>
     <div id="div-headtop">
         <div class="logotrai">
-            <a class="">
+            <a class="#">
                 <img src="~/Content/images/loge-headtop3.jpg" style="height:50px; width:100px;float:left;margin-top:10px;margin-left:40px">
             </a>
-            <a class="">
+            <a class="#">
                 <img src="~/Content/images/thuexelink.jpg" style="height:50px; width:80px;float:left;margin-top:10px;margin-left:20px">
             </a>
         </div>
@@ -28,17 +28,16 @@
         </p>
     </div>
     <div id="div-top">
-
         <div class="edittop">
             <div class="row">
                 <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
-                    <a href="#">
+                    <a href="@Url.Action("Index", "Home")">
                         <img src="~/Content/images/miotologo.png" style="height:100%; width:100px;float:left;margin-top:30px;margin-left:120px">
                     </a>
                 </div>
                 <div class="col-lg-10 col-md-2 col-sm-2 col-xs-12" style="margin-top:10px">
                     <ul class="nav navbar-nav navbar-right" style="margin-right:30px">
-                        <li><a href=""> <b style="color:black">Trang chủ</b></a></li>
+                        <li><a href="@Url.Action("Index", "Home")"> <b style="color:black">Trang chủ</b></a></li>
                         <li><a href="@Url.Action("Index", "Product")"><b style="color:black">Xem xe</b></a></li>
                         <li><a href="#3"><b style="color:black">Liên hệ</b></a></li>
                         <li style="margin-top:14px">|</li>
@@ -70,9 +69,9 @@
         <div class="container">
             <img src="~/Content/images/hanhtrinh.jpg" style="height:700px; width:80%;margin-left:10%">
             <button class="btn">
-                <a href="@Url.Action("Index", "Product")" >
+                @*<a href="@Url.Action("Index", "Product")" >
                     <b>Trải Nghiệm Ngay</b>
-                </a>
+                </a>*@
             </button>
             <div class="centered">
                 <span>

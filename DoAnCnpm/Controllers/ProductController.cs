@@ -1,20 +1,20 @@
-﻿using DoAnCnpm.Models;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.IO;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using PagedList;
-using PagedList.Mvc;
-using System.Net;
-using System.Drawing.Printing;
-using System.Runtime.InteropServices;
-using DoAnCnpm.Models.CommentViewModal;
+﻿    using DoAnCnpm.Models;
+    using System;
+    using System.Collections.Generic;
+    using System.Data.Entity;
+    using System.IO;
+    using System.Linq;
+    using System.Web;
+    using System.Web.Mvc;
+    using PagedList;
+    using PagedList.Mvc;
+    using System.Net;
+    using System.Drawing.Printing;
+    using System.Runtime.InteropServices;
+    using DoAnCnpm.Models.CommentViewModal;
 
-namespace DoAnCnpm.Controllers
-{
+    namespace DoAnCnpm.Controllers
+    {
     public class ProductController : Controller
     {
         DoAnPMEntities database = new DoAnPMEntities();
@@ -165,22 +165,21 @@ namespace DoAnCnpm.Controllers
             {
                 // Lấy giá trị UserName từ phiên làm việc
                 var userName = Session["UserCus"] as string;
+                var userID = Session["UserId"] as int?;
 
-                // Lấy giá trị UserID (IDCus) từ phiên làm việc
-                //var userID = Session["IDCus"] as int?; 
 
-                    Comment newComment = new Comment
-                    {
-                        CommentMsg = comment.CommentMsg,
-                        CommentDate = DateTime.Now,
-                        XeId = comment.ProductID,
-                        UserName = userName,
-                        UserID = comment.UserID, // Set the UserID with the value from the session
-                        Rate = comment.Rate
-                    };
-                    database.Comments.Add(newComment);
-                    database.SaveChanges();
-                
+                Comment newComment = new Comment
+                {
+                    CommentMsg = comment.CommentMsg,
+                    CommentDate = DateTime.Now,
+                    XeId = comment.ProductID,
+                    UserName = userName,
+                    UserID = userID,
+                    Rate = comment.Rate
+                };
+                database.Comments.Add(newComment);
+                database.SaveChanges();
+
             }
 
             return RedirectToAction("Details", new { id = comment.ProductID });
@@ -193,7 +192,30 @@ namespace DoAnCnpm.Controllers
             var comments = database.Comments.Where(c => c.XeId == productId).ToList();
             return PartialView("_CommentsPartial", comments);
         }
+        [HttpPost]
+        public ActionResult DeleteComment(int commentId)
+        {
+            // Lấy giá trị UserID từ phiên làm việc
+            var userId = Session["UserId"] as int?;
 
+            // Lấy ProductID của bình luận trước khi xóa
+            var productID = database.Comments.Where(c => c.ID == commentId).Select(c => c.XeId).FirstOrDefault();
+
+            // Kiểm tra xem người dùng có quyền xóa bình luận hay không
+            Comment cmt = database.Comments.FirstOrDefault(c => c.ID == commentId && c.UserID == userId);
+
+            if (cmt != null)
+            {
+                database.Comments.Remove(cmt);
+                database.SaveChanges();
+
+                // Nếu xóa thành công, trả về một JSON object báo cáo xóa thành công
+                return Json(new { success = true, productId = productID });
+            }
+
+            // Nếu không có quyền hoặc xóa không thành công, trả về một JSON object báo cáo không thành công
+            return Json(new { success = false });
+        }
 
     }
 }

@@ -28,16 +28,14 @@ namespace DoAnCnpm.Controllers
             s.PassCus.Equals(customer.PassCus)).FirstOrDefault();
             if (check == null)
             {
-                customer.LoginErrorMessage = "UserCus or Password wrong, Please try again!";
-                return View("Index", customer);
+                customer.LoginErrorMessage = "Sai tài khoản hoặc mật khẩu, vui lòng thử lại!";
+                return View("Authen", customer);
             }
             else
             {
-                Session["IDCus"] = customer.IDCus;
                 Session["UserCus"] = customer.UserCus;
-
-                // Gán UserID cho người dùng
-                customer.UserID = (int)Session["IDCus"];
+                Session["IDCus"] = customer.IDCus;
+                Session["UserId"] = check.IDCus;
 
                 return RedirectToAction("Index", "Product");
             }
@@ -61,18 +59,11 @@ namespace DoAnCnpm.Controllers
                     database.Customers.Add(customer);
                     database.SaveChanges();
 
-                    // Gán UserID cho người dùng
-                    customer.UserID = customer.IDCus;
-
-                    // Lưu thông tin người dùng vào phiên làm việc
-                    Session["IDCus"] = customer.IDCus;
-                    Session["UserCus"] = customer.UserCus;
-
-                    return RedirectToAction("Index", "Product");
+                    return RedirectToAction("Authen", "Login");
                 }
                 else
                 {
-                    ViewBag.error = "Username already exists! Use another please";
+                    ViewBag.error = "Tài khoản đã tồn tại thử lại tới tên tài khoản khác";
                     return View();
                 }
             }

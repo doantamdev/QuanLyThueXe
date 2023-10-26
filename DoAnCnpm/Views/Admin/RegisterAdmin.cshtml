@@ -11,7 +11,7 @@
     }
 </style>
 
-<h2>RegisterUser</h2>
+<h2>Đăng ký tài khoản Admin</h2>
 @using (Html.BeginForm("RegisterAdmin", "Admin", FormMethod.Post, new
 {
     enctype = "multipart/form-data"
@@ -24,16 +24,11 @@
         <p>@ViewBag.ErrorRegister</p>
     }
 
-    <p>@Html.LabelFor(model => model.Username)</p>
+    <p>Nhập Username:</p>
     <p>@Html.EditorFor(model => model.Username)</p>
     <p>@Html.ValidationMessageFor(model => model.Username)</p>
 
-    <p>@Html.LabelFor(model => model.UserRoleMappings)</p>
-    <p>@Html.EditorFor(model => model.UserRoleMappings)</p>
-    <p>@Html.ValidationMessageFor(model => model.UserRoleMappings)</p>
-
-
-    <p>@Html.LabelFor(model => model.Password)</p>
+    <p>Mật khẩu: </p>
     <p>@Html.EditorFor(model => model.Password)</p>
     <p>@Html.ValidationMessageFor(model => model.Password)</p>
 

@@ -11,23 +11,23 @@
         color: red;
     }
 </style>
-<h2>FormLogin</h2>
+<h2>Đăng nhập tài khoản Admin</h2>
 @using (Html.BeginForm("LoginAdmin", "Admin"))
 {
     @Html.AntiForgeryToken()
     <table>
         <tr>
-            <td>@Html.LabelFor(model => model.Username)</td>
+            <td>Tài khoản Admin: </td>
             <td>@Html.TextBoxFor(model => model.Username, new { style = "field-validation-error" })</td>
             <td>@Html.ValidationMessageFor(model => model.Username)</td>
         </tr>
         <tr>
-            <td>@Html.LabelFor(model => model.Password)</td>
+            <td>Mật khẩu:</td>
             <td>@Html.PasswordFor(model => model.Password)</td>
             <td>@Html.ValidationMessageFor(model => model.Password)</td>
             @if (ViewBag.ErrorInfo== null)
             {
-                <p> ViewBag.ErrorInfo </p>
+                <div> ViewBag.ErrorInfo </div>
             }
         </tr>
         <tr>

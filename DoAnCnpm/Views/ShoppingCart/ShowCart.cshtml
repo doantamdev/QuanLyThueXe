@@ -82,6 +82,14 @@
                                     <input type="submit" value="Giảm giá" />
                                 </td>
                             </tr>
+                            <tr>
+                                @if (!string.IsNullOrEmpty(ViewBag.VoucherMessage))
+                                {
+                                    <td class="alert alert-danger">
+                                        @ViewBag.VoucherMessage
+                                    </td>
+                                }
+                            </tr>
                         </table>
                     }
       
@@ -159,6 +167,7 @@ else
                 buttonText: "<i class='fa fa-calendar'></i>"
             });
         });
+
     </script>
 
 }

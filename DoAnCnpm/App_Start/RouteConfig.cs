@@ -18,6 +18,12 @@ namespace DoAnCnpm
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+            routes.MapRoute(
+            name: "DeleteComment",
+            url: "Product/DeleteComment/{commentId}",
+             defaults: new { controller = "Product", action = "DeleteComment", commentId = UrlParameter.Optional }
+            );
+
         }
     }
 }

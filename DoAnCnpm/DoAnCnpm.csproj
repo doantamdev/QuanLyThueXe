@@ -401,7 +401,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Views\Comment\" />
     <Folder Include="Views\GetIDCus\" />
-    <Folder Include="Views\test\" />
     <Folder Include="Views\Vouncher\" />
   </ItemGroup>
   <ItemGroup>

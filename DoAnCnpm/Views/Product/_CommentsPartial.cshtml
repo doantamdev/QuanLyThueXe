@@ -1,23 +1,79 @@
 ﻿@model List<DoAnCnpm.Models.Comment>
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery.unobtrusive-ajax.min.js"></script>
+
+<style>
+    .text-red {
+        color: yellow;
+    }
+</style>
+
 @if (Model != null && Model.Count > 0)
 {
-    <ul>
+    <div>
         @foreach (var comment in Model)
         {
-            <li>
+            <p>
                 <strong>Tên người dùng:</strong> @comment.UserName
-            </li>
-            <li>
+            </p>
+            <p>
                 <strong>Nội dung bình luận:</strong> @comment.CommentMsg
-            </li>
-            <li>
-                <strong>Đánh giá:</strong> @comment.Rate
-            </li>
+            </p>
+            <p>
+                <strong>Đánh giá:</strong> @Html.Raw(ConvertToStars(comment.Rate, "text-red"))
+            </p>
+            <p>
+                @if (Session["UserId"] != null && (int)Session["UserId"] == comment.UserID)
+                {
+                    <button class="delete-comment" data-commentid="@comment.ID" onclick="deleteComment(@comment.ID, this)">Xóa</button>
+                }
+            </p>
         }
-    </ul>
+    </div>
 }
+
 else
 {
     <p>Không có bình luận nào.</p>
+}
+
+<script>
+    function deleteComment(commentId, button) {
+        if (confirm('Bạn có chắc muốn xóa bình luận này?')) {
+            $.ajax({
+                url: '@Url.Action("DeleteComment", "Product")',
+                type: 'POST',
+                data: { commentId: commentId },
+                success: function (result) {
+                    if (result.success) {
+                        window.location.reload();
+                    } else {
+                        alert('Xóa bình luận không thành công.');
+                    }
+                },
+                error: function () {
+                    alert('Có lỗi xảy ra khi xóa bình luận.');
+                }
+            });
+        }
+    }
+</script>
+
+
+
+@functions {
+    string ConvertToStars(int? rate, string colorClass)
+    {
+        string stars = "";
+        if (rate != null)
+        {
+            for (int i = 0; i < rate; i++)
+            {
+                stars += $"<i class='fa fa-star {colorClass}'></i>";
+            }
+        }
+        return stars;
+    }
 }

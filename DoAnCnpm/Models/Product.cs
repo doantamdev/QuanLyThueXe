@@ -21,7 +21,7 @@ namespace DoAnCnpm.Models
         {
             this.Comments = new HashSet<Comment>();
             this.OrderDetails = new HashSet<OrderDetail>();
-            ImagePro = "/Content/images/xewave.jpg";
+            this.ImagePro = "/Content/images/xewave.jpg";
         }
     
         public int ProductID { get; set; }
