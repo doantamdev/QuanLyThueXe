@@ -36,7 +36,7 @@ namespace DoAnCnpm.Controllers
                 Session["UserCus"] = customer.UserCus;
                 Session["IDCus"] = customer.IDCus;
                 Session["UserId"] = check.IDCus;
-
+                Session["ProfileCus"] = check;
                 return RedirectToAction("Index", "Product");
             }
         }

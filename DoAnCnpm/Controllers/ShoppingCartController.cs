@@ -327,8 +327,65 @@ namespace DoAnCnpm.Controllers
             {
                 return View("FailureView");
             }
+            try
+            {
+                Cart cart = Session["Cart"] as Cart;
+
+                if (Session["UserCus"] == null)
+                {
+                    return RedirectToAction("Authen", "Login");
+                }
+
+                var cus = Session["ProfileCus"] as Customer;
+                //Bảng hoá đơn sản phẩm
+
+                if (cus == null)
+                {
+                    return Content("Lỗi xác thực");
+                }
+                else
+                {
+                    OrderPro order = new OrderPro();
+                    order.DateOrder = DateTime.Now;
+                    order.TypePayment = 2;
+                    order.IDCus = cus.IDCus;
+                    order.NameCusNonAccount = cus.NameCus;
+                    order.PhoneCusNonAccount = cus.PhoneCus;
+
+                    database.OrderProes.Add(order);
+
+                    foreach (var item in cart.Items)
+                    {
+                        //Lưu dòng sản phẩm vào bảng Chi tiết Hoá đơn
+                        OrderDetail detail = new OrderDetail();
+                        detail.IDOrder = order.ID;
+                        detail.IDProduct = item.product.ProductID;
+                        detail.UnitPrice = (double)item.product.Price;
+                        detail.Quantity = item.quantity;
+                        database.OrderDetails.Add(detail);
+
+                        // -- Xử lý cập nhật lại số lượng tồn trong bảng Product -- //
+                        //Lấy ID Product đang có trong giỏ hàng
+                        foreach (var p in database.Products.Where(s => s.ProductID == detail.IDProduct))
+                        {
+                            //Số lượng tồn mới = Số lượng tồn - Số đã mua
+                            var updateQuantity = p.Quantity - item.quantity;
+                            //Thực hiện cập nhật lại số lượng tồn cho cột Quantity của bảng Product
+                            p.Quantity = updateQuantity; ;
+                        }
+                    }
+                    database.SaveChanges();
+                    cart.ClearCart();
+                    //return RedirectToAction("CheckOut_Success", "ShoppingCart");
+                }
+            }
+            catch
+            {
+                return Content("Lỗi thanh toán - Xin kiểm tra thông tin khách hàng...Xin cảm ơn.");
+            }
             //on successful payment, show success page to user.  
-            return View("SuccessView");
+            //return View("SuccessView");
+            return RedirectToAction("CheckOut_Success", "ShoppingCart");
         }
         private PayPal.Api.Payment payment;
         private Payment ExecutePayment(APIContext apiContext, string payerId, string paymentId)
