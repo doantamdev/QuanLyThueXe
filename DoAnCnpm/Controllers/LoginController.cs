@@ -37,6 +37,10 @@ namespace DoAnCnpm.Controllers
                 Session["IDCus"] = customer.IDCus;
                 Session["UserId"] = check.IDCus;
                 Session["ProfileCus"] = check;
+                if (check.Gioitinh == 0)
+                {
+                    return RedirectToAction("Sukienphunu", "Login");
+                }
                 return RedirectToAction("Index", "Product");
             }
         }
@@ -57,8 +61,7 @@ namespace DoAnCnpm.Controllers
                 {
                     database.Configuration.ValidateOnSaveEnabled = false;
                     database.Customers.Add(customer);
-                    database.SaveChanges();
-
+                    database.SaveChanges();                
                     return RedirectToAction("Authen", "Login");
                 }
                 else
@@ -69,7 +72,10 @@ namespace DoAnCnpm.Controllers
             }
             return View();
         }
-
+        public ActionResult Sukienphunu()
+        {
+            return View();
+        }
 
         public ActionResult LogOut()
         {

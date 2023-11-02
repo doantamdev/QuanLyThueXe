@@ -83,9 +83,44 @@
         [HttpPost]
         public ActionResult Edit(int id, Product pro)
         {
-            database.Entry(pro).State = System.Data.Entity.EntityState.Modified;
-            database.SaveChanges();
-            return RedirectToAction("index");
+            try
+            {
+                // Find the existing product by ID
+                var existingProduct = database.Products.Find(id);
+
+                if (existingProduct == null)
+                {
+                    // Handle the case where the product with the given ID doesn't exist
+                    return HttpNotFound();
+                }
+
+                // Update the product properties
+                existingProduct.NamePro = pro.NamePro;
+                existingProduct.Price = pro.Price;
+                existingProduct.Category = pro.Category;
+                existingProduct.DecriptionPro = pro.DecriptionPro;
+                existingProduct.Quantity = pro.Quantity;
+                existingProduct.MauXe = pro.MauXe;
+                existingProduct.Vitri = pro.Vitri;
+
+                if (pro.UploadImage != null)
+                {
+                    // Handle the image update
+                    string filename = Path.GetFileNameWithoutExtension(pro.UploadImage.FileName);
+                    string extent = Path.GetExtension(pro.UploadImage.FileName);
+                    filename = filename + extent;
+                    existingProduct.ImagePro = "~/Content/images/" + filename;
+                    pro.UploadImage.SaveAs(Server.MapPath("~/Content/images/" + filename));
+                }
+
+                database.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                // Handle any exceptions here
+                return View();
+            }
         }
         public ActionResult Delete(int id)
         {

@@ -44,6 +44,9 @@
           <Property Name="EmailCus" Type="nvarchar(max)" />
           <Property Name="UserCus" Type="nvarchar(max)" />
           <Property Name="PassCus" Type="nvarchar(max)" />
+          <Property Name="Diachi" Type="nvarchar(max)" />
+          <Property Name="Gioitinh" Type="int" />
+          <Property Name="Ngaysinh" Type="date" />
         </EntityType>
         <EntityType Name="HighChart">
           <Key>
@@ -305,6 +308,9 @@
           <Property Name="PassCus" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Comments" Relationship="Self.FK__Comments__UserID__5165187F" FromRole="Customer" ToRole="Comments" />
           <NavigationProperty Name="OrderProes" Relationship="Self.FK__OrderPro__IDCus__3E52440B" FromRole="Customer" ToRole="OrderPro" />
+          <Property Name="Diachi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Gioitinh" Type="Int32" />
+          <Property Name="Ngaysinh" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="HighChart">
           <Key>
@@ -568,6 +574,9 @@
           <EntitySetMapping Name="Customers">
             <EntityTypeMapping TypeName="DoAnPMModel.Customer">
               <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="Ngaysinh" ColumnName="Ngaysinh" />
+                <ScalarProperty Name="Gioitinh" ColumnName="Gioitinh" />
+                <ScalarProperty Name="Diachi" ColumnName="Diachi" />
                 <ScalarProperty Name="IDCus" ColumnName="IDCus" />
                 <ScalarProperty Name="NameCus" ColumnName="NameCus" />
                 <ScalarProperty Name="PhoneCus" ColumnName="PhoneCus" />

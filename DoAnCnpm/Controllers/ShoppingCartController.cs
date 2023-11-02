@@ -237,6 +237,18 @@ namespace DoAnCnpm.Controllers
                 // Trả về view thông báo hoặc làm điều gì đó khác tùy theo yêu cầu của bạn
             }
 
+            if (Session["UserCus"] == null)
+            {
+                return RedirectToAction("Authen", "Login");
+            }
+
+            var cus = Session["ProfileCus"] as Customer;
+            if (cus.Gioitinh != 0) 
+            {
+                ViewBag.VoucherMessage = "Chỉ khách hàng nữ mới được sử dụng phiếu giảm giá.";
+                return View(cart);
+            }
+
             // Xử lý mã voucher và tính toán giảm giá dựa trên mã voucher (vouncher)
             decimal discountAmount = CalculateDiscountAmount(vouncher);
 
@@ -263,6 +275,18 @@ namespace DoAnCnpm.Controllers
 
             return View(cart);
         }
+        public ActionResult CheckVoucher(string vouncher)
+{
+    // Xử lý mã voucher và tính toán giảm giá dựa trên mã voucher (vouncher)
+    decimal discountAmount = CalculateDiscountAmount(vouncher);
+
+    if (discountAmount == -1)
+    {
+        return Content("Không tìm thấy voucher."); // Trả về thông báo nếu không tìm thấy voucher
+    }
+
+    return Content(""); // Trả về chuỗi rỗng nếu không có lỗi
+}
 
         public ActionResult FailureView()
         {
@@ -351,6 +375,7 @@ namespace DoAnCnpm.Controllers
                     order.IDCus = cus.IDCus;
                     order.NameCusNonAccount = cus.NameCus;
                     order.PhoneCusNonAccount = cus.PhoneCus;
+                    order.AddressDeliverry = cus.Diachi;
 
                     database.OrderProes.Add(order);
 

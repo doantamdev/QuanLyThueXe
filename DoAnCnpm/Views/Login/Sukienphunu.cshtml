@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewBag.Title = "Sukienphunu";
+    Layout = "~/Views/Shared/sukienphunu.cshtml";
+}
+
+<style>
+    .card {
+      align-items:center;
+      justify-content:center;
+      width:390px;
+      height:500PX;
+      align-content:center;
+      border: 1px solid;
+      border-radius:5px;
+      padding:64px;
+      margin:auto;
+      position:center;
+      margin-bottom:30px;
+    }
+    .buttonsk {
+        margin-block-start: 30px;
+        justify-content: center;
+        text-align: center;
+        position: center;
+    }
+</style>
+
+<h2 style="text-align:center;color:deeppink;font-size:50px">Mừng sự kiện 8/3</h2>
+<div class="card">
+    <img src="~/Content/img/flowers.gif" alt="Computer man" style="width:260px;height:320px;">
+    <div class="buttonsk">
+    <input type="text" value="TAM123" id="myInput" style="align-content:center;margin-bottom:5px">
+        <button onclick="myFunction()" style="">Lấy vouncher</button>
+        <a href="@Url.Action("Index", "Product")"><b style="color:deeppink;font-weight:bold;font-style:italic">Dùng ngay</b></a>
+    </div>
+</div>
+<script>
+    function myFunction() {
+        // Get the text field
+        var copyText = document.getElementById("myInput");
+
+        // Select the text field
+        copyText.select();
+        copyText.setSelectionRange(0, 99999); // For mobile devices
+
+        // Copy the text inside the text field
+        navigator.clipboard.writeText(copyText.value);
+
+        // Alert the copied text
+        alert("Copied the text: " + copyText.value);
+    }
+</script>

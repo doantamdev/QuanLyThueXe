@@ -247,6 +247,7 @@
     <Content Include="Content\img\dich_vu_thue_xe_tu_lai_hanoi.f177339e.svg" />
     <Content Include="Content\img\dich_vu_thue_xe_tu_lai_tphcm.jpg" />
     <Content Include="Content\img\E1M6GWM9.jpg" />
+    <Content Include="Content\img\flowers.gif" />
     <Content Include="Content\img\gia_thue_xe_4cho_tai_tphcm.9dcd3930.svg" />
     <Content Include="Content\img\gia_thue_xe_7cho_tai_hanoi.0834bed8.svg" />
     <Content Include="Content\img\gia_thue_xe_7cho_tai_tphcm.9455973a.svg" />
@@ -442,6 +443,8 @@
     <Content Include="Views\ShoppingCart\SuccessView.cshtml" />
     <Content Include="Views\Shared\_trangchu2.cshtml" />
     <Content Include="Views\Home\TrangHome.cshtml" />
+    <Content Include="Views\Login\Sukienphunu.cshtml" />
+    <Content Include="Views\Shared\sukienphunu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

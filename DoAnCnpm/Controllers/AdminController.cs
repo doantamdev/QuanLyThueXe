@@ -57,10 +57,10 @@ namespace DoAnCnpm.Controllers
             }
             return View();
         }
-        public ActionResult LogOutAdmin()
+        public ActionResult LogOut()
         {
             Session.Abandon();
-            return RedirectToAction("Index", "LoginUser");
+            return RedirectToAction("Index", "Admin");
         }
     }
 }

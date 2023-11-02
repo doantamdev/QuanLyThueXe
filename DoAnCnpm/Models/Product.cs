@@ -34,6 +34,7 @@ namespace DoAnCnpm.Models
         public string Vitri { get; set; }
         public Nullable<int> Quantity { get; set; }
         public Nullable<int> IsGiveBack { get; set; }
+
         [NotMapped]
         public HttpPostedFileBase UploadImage { get; set; }
 

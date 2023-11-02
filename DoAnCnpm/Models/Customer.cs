@@ -21,6 +21,7 @@ namespace DoAnCnpm.Models
             this.Comments = new HashSet<Comment>();
             this.OrderProes = new HashSet<OrderPro>();
         }
+
         public int IDCus { get; set; }
         [Required(ErrorMessage = "Vui long nhap ten!")]
         public string NameCus { get; set; }
@@ -42,7 +43,10 @@ namespace DoAnCnpm.Models
         [Compare("PassCus")]
         public string ConfirmPassCus { get; set; }
         public string LoginErrorMessage { get; set; }
-
+        public string Diachi { get; set; }
+        public Nullable<int> Gioitinh { get; set; }
+        public Nullable<System.DateTime> Ngaysinh { get; set; }
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Comment> Comments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
