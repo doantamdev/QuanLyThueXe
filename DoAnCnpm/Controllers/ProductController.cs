@@ -43,6 +43,8 @@
 
         public ActionResult Create()
         {
+            List<Category> list = database.Categories.ToList();
+            ViewBag.listCategory = new SelectList(list, "IDCate", "NameCate", "");
             Product pro = new Product();
             return View(pro);
         }
@@ -56,6 +58,7 @@
 
         public ActionResult Create(Product pro)
         {
+            List<Category> list = database.Categories.ToList();
             try
             {
                 if (pro.UploadImage != null)
@@ -66,6 +69,7 @@
                     pro.ImagePro = "~/Content/images/" + filename;
                     pro.UploadImage.SaveAs(Path.Combine(Server.MapPath("~/Content/images/"), filename));
                 }
+                ViewBag.listCategory = new SelectList(list, "IDCate", "NameCate", 1);
                 database.Products.Add(pro);
                 database.SaveChanges();
                 return RedirectToAction("Index");
@@ -78,7 +82,21 @@
 
         public ActionResult Edit(int id)
         {
-            return View(database.Products.Where(s => s.ProductID == id).FirstOrDefault());
+            var findPro = database.Products.Find(id);
+
+            if (findPro == null)
+            {
+              
+                return HttpNotFound();
+            }
+
+           
+            List<Category> list = database.Categories.ToList();
+
+            
+            ViewBag.listCategory = new SelectList(list, "IDCate", "NameCate", findPro.Category);
+
+            return View(findPro);
         }
         [HttpPost]
         public ActionResult Edit(int id, Product pro)
@@ -105,20 +123,21 @@
 
                 if (pro.UploadImage != null)
                 {
-                    // Handle the image update
                     string filename = Path.GetFileNameWithoutExtension(pro.UploadImage.FileName);
                     string extent = Path.GetExtension(pro.UploadImage.FileName);
                     filename = filename + extent;
                     existingProduct.ImagePro = "~/Content/images/" + filename;
                     pro.UploadImage.SaveAs(Server.MapPath("~/Content/images/" + filename));
                 }
+                List<Category> list = database.Categories.ToList();
+
+                ViewBag.listCategory = new SelectList(list, "IDCate", "NameCate", existingProduct.Category);
 
                 database.SaveChanges();
                 return RedirectToAction("Index");
             }
             catch
             {
-                // Handle any exceptions here
                 return View();
             }
         }

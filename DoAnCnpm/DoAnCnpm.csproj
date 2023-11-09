@@ -146,6 +146,7 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\OrderDetailController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Controllers\ThongKeController.cs" />
     <Compile Include="Controllers\VouncherController.cs" />
@@ -203,6 +204,7 @@
     <Compile Include="Models\UserRoleMapping.cs">
       <DependentUpon>DoanPMEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UserRoleProvider.cs" />
     <Compile Include="Models\ViewModel.cs" />
     <Compile Include="Models\Voucher.cs">
       <DependentUpon>DoanPMEntities.tt</DependentUpon>
@@ -445,9 +447,15 @@
     <Content Include="Views\Home\TrangHome.cshtml" />
     <Content Include="Views\Login\Sukienphunu.cshtml" />
     <Content Include="Views\Shared\sukienphunu.cshtml" />
+    <Content Include="Views\Role\Create.cshtml" />
+    <Content Include="Views\Role\Details.cshtml" />
+    <Content Include="Views\Role\Edit.cshtml" />
+    <Content Include="Views\Role\Delete.cshtml" />
+    <Content Include="Views\Role\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Sql\" />
     <Folder Include="Views\Comment\" />
     <Folder Include="Views\GetIDCus\" />
     <Folder Include="Views\Vouncher\" />

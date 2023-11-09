@@ -26,7 +26,7 @@
         <td>@Html.LabelFor(model => model.Category)</td>
         <td>
             @{
-                Html.RenderAction("SelectCate", "Product");
+                @Html.DropDownListFor(model => model.Category, (SelectList)ViewBag.listCategory)
             }
         </td>
     </tr>
