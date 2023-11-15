@@ -71,6 +71,20 @@
                 <td colspan="6" style="text-align:right">Tổng tiền: @Model.Total_money()</td>
             </tr>
             <tr>
+                <td>
+                    @using (Html.BeginForm("Payment", "Payment"))
+                    {
+                        <input type="number" value="@Model.Total_money()" name="totalMoney" hidden />
+                        <input type="submit" value="Thanh toán bằng VNPAY" class="khungtt" />
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td style="border-top:none; text-align:center; margin-top:30px">
+                    <a href="/shoppingcart/PaymentWithPayPal?" class="khungtt">Thanh toán bằng paypal </a>
+                </td>
+            </tr>
+            <tr>
                 <td colspan="2"></td>
                 <td colspan="4">
                     @using (Html.BeginForm("ShowCart", "ShoppingCart", FormMethod.Get))
@@ -117,27 +131,16 @@
                                 <td></td>
                                 <td>
                                     <input type="submit" value="CheckOut" class="khungtt" />
-                                </td>
-                                <td style="border-top:none; text-align:center">
-                                    <a href="/shoppingcart/PaymentWithPayPal?" class="btn btn-success">Thanh toán bằng paypal </a>
-                                </td>
-                            </tr>
+                                </td>                           
+                         </tr>
                             <tr>
-                               
+                              
                             </tr>
 
                         </table>
                     }
                 </td>
-                <td>
-
-                    @using (Html.BeginForm("Payment", "Payment"))
-                    {
-                        <input type="number" value="@Model.Total_money()" name="totalMoney" hidden />
-                        <input type="submit" value="Thanh toán bằng VNPAY" class="btn btn-primary" />
-                    }
-
-                </td>
+             
             </tr>
         </tfoot>
     </table>
