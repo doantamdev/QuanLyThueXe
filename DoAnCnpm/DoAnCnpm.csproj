@@ -145,6 +145,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\OrderDetailController.cs" />
+    <Compile Include="Controllers\PaymentController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\ShoppingCartController.cs" />
@@ -206,6 +207,10 @@
     </Compile>
     <Compile Include="Models\UserRoleProvider.cs" />
     <Compile Include="Models\ViewModel.cs" />
+    <Compile Include="Models\VNPay\Utils.cs" />
+    <Compile Include="Models\VNPay\VnPayCompare.cs" />
+    <Compile Include="Models\VNPay\VnPayLibrary.cs" />
+    <Compile Include="Models\VNPay\VNPayReturn.cs" />
     <Compile Include="Models\Voucher.cs">
       <DependentUpon>DoanPMEntities.tt</DependentUpon>
     </Compile>
@@ -458,6 +463,7 @@
     <Folder Include="Content\Sql\" />
     <Folder Include="Views\Comment\" />
     <Folder Include="Views\GetIDCus\" />
+    <Folder Include="Views\Payment\" />
     <Folder Include="Views\Vouncher\" />
   </ItemGroup>
   <ItemGroup>

@@ -130,14 +130,12 @@
                     }
                 </td>
                 <td>
-  
-                    <form id="vnpay-form" action="@Url.Action("VnPayPayment", "ShoppingCart")" method="post">
-                        <!-- Thông tin đơn hàng -->
-                        <input type="hidden" name="orderCode" value="@Model.OrderCode">
-                        <input type="hidden" name="amount" value="@Model.Total_money()">
 
-                        <button type="submit" id="btn-pay">Thanh toán bằng VNPAY</button>
-                    </form>
+                    @using (Html.BeginForm("Payment", "Payment"))
+                    {
+                        <input type="number" value="@Model.Total_money()" name="totalMoney" hidden />
+                        <input type="submit" value="Thanh toán bằng VNPAY" class="btn btn-primary" />
+                    }
 
                 </td>
             </tr>
