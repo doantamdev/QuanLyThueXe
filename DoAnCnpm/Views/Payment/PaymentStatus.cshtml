@@ -1,0 +1,41 @@
+﻿@model DoAnCnpm.Models.VNPay.VNPayReturn
+@{
+    ViewBag.Title = "Trạng thái giao dịch";
+    Layout = "~/Views/Shared/TrangDatXe.cshtml";
+}
+
+<h2 class="text-uppercase text-center mt-3 mb-3">@Model.ReturnText</h2>
+<div class="container">
+    <div class="col">
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <div class="Sold">
+                    <table class="w-100">
+                        <tr>
+                            <th>Mã Website</th>
+                            <td>@Model.TerminalID</td>
+                        </tr>
+                        <tr>
+                            <th>Mã thanh toán</th>
+                            <td>@Model.ClientTransacID</td>
+                        </tr>
+                        <tr>
+                            <th>Mã giao dịch VNPay</th>
+                            <td>@Model.ServerTransacID</td>
+                        </tr>
+                        <tr>
+                            <th>Số tiền thanh toán</th>
+                            <td class="fs-5 text-danger fw-bold">@string.Format($"{Model.PaymentAmount:0,0} đ")</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="text-center mt-3 mb-3">
+                    <a href="@Url.Action("Index","Home")" class="btn btn-outline-success">Về trang chủ</a>
+                </div>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+    </div>
+</div>
+

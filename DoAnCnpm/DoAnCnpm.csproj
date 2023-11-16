@@ -194,7 +194,6 @@
     <Compile Include="Models\OrderPro.cs">
       <DependentUpon>DoanPMEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Payment\VnPayLibrary.cs" />
     <Compile Include="Models\PaypalConfiguration.cs" />
     <Compile Include="Models\Product.cs">
       <DependentUpon>DoanPMEntities.tt</DependentUpon>
@@ -353,6 +352,8 @@
       <DependentUpon>DoanPMEntities.edmx</DependentUpon>
       <LastGenOutput>DoanPMEntities.cs</LastGenOutput>
     </Content>
+    <Content Include="Query\CSDL.sql" />
+    <Content Include="Query\Thẻ test.txt" />
     <Content Include="Scripts\bootstrap-datetimepicker.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -457,13 +458,13 @@
     <Content Include="Views\Role\Edit.cshtml" />
     <Content Include="Views\Role\Delete.cshtml" />
     <Content Include="Views\Role\Index.cshtml" />
+    <Content Include="Views\Payment\PaymentStatus.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\Sql\" />
     <Folder Include="Views\Comment\" />
     <Folder Include="Views\GetIDCus\" />
-    <Folder Include="Views\Payment\" />
     <Folder Include="Views\Vouncher\" />
   </ItemGroup>
   <ItemGroup>

@@ -1,13 +1,11 @@
 ﻿using DoAnCnpm.Models;
-using DoAnCnpm.Models.Payment;
+using DoAnCnpm.Models.VNPay;
 using PayPal.Api;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Globalization;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 
 namespace DoAnCnpm.Controllers
@@ -20,14 +18,34 @@ namespace DoAnCnpm.Controllers
         {
             return View();
         }
-
-    /*    public ActionResult ShowCart()
+        public void Payment(double totalMoney)
         {
-            if (Session["Cart"] == null)
-                return View("EmptyCart");
-            Cart item = Session["Cart"] as Cart;
-            return View(item);
-        }*/
+            //Get Config Info
+            string vnp_Returnurl = ConfigurationManager.AppSettings["vnp_Returnurl"]; //URL nhan ket qua tra ve 
+            string vnp_Url = ConfigurationManager.AppSettings["vnp_Url"]; //URL thanh toan cua VNPAY 
+            string vnp_TmnCode = ConfigurationManager.AppSettings["vnp_TmnCode"]; //Ma định danh merchant kết nối (Terminal Id)
+            string vnp_HashSecret = ConfigurationManager.AppSettings["vnp_HashSecret"]; //Secret Key
+
+            //Build URL for VNPAY
+            VnPayLibrary vnpay = new VnPayLibrary();
+            vnpay.AddRequestData("vnp_Version", VnPayLibrary.VERSION);
+            vnpay.AddRequestData("vnp_Command", "pay");
+            vnpay.AddRequestData("vnp_TmnCode", vnp_TmnCode);
+            vnpay.AddRequestData("vnp_Amount", (totalMoney * 100).ToString()); // Nhân cho 100 để thêm 2 số 0 :) 
+            vnpay.AddRequestData("vnp_BankCode", "VNBANK");
+            vnpay.AddRequestData("vnp_CreateDate", DateTime.Now.ToString("yyyyMMddHHmmss"));
+            vnpay.AddRequestData("vnp_CurrCode", "VND");
+            vnpay.AddRequestData("vnp_IpAddr", Utils.GetIpAddress());
+            vnpay.AddRequestData("vnp_Locale", "vn");
+            vnpay.AddRequestData("vnp_OrderInfo", "Thanh toan don hang");
+            vnpay.AddRequestData("vnp_OrderType", "other");
+            vnpay.AddRequestData("vnp_ReturnUrl", vnp_Returnurl);
+            vnpay.AddRequestData("vnp_TxnRef", DateTime.Now.Ticks.ToString()); // Mã Website (Terminal ID)
+
+            //Add Params of 2.1.0 Version
+            string paymentUrl = vnpay.CreateRequestUrl(vnp_Url, vnp_HashSecret);
+            Response.Redirect(paymentUrl);
+        }
 
         //Action Tạo mới giỏ hàng
         public Cart GetCart()
@@ -119,12 +137,22 @@ namespace DoAnCnpm.Controllers
                         //Số lượng tồn mới = Số lượng tồn - Số đã mua
                         var updateQuantity = p.Quantity - item.quantity;
                         //Thực hiện cập nhật lại số lượng tồn cho cột Quantity của bảng Product
-                        p.Quantity = updateQuantity;;
+                        p.Quantity = updateQuantity; ;
                     }
                 }
-                database.SaveChanges();
-                cart.ClearCart();
-                return RedirectToAction("CheckOut_Success", "ShoppingCart");
+
+                Payment(Convert.ToDouble(cart.Total_money()));
+                VNPayReturn vNPayReturn = new VNPayReturn();
+                vNPayReturn.ProcessResponses();
+                if (vNPayReturn.TransacStatus == 0)
+                {
+                    database.SaveChanges();
+                    cart.ClearCart();
+
+                    return RedirectToAction("CheckOut_Success", "ShoppingCart", vNPayReturn);
+                }
+
+                return RedirectToAction("PaymentStatus", "Payment", vNPayReturn);
             }
             catch
             {
@@ -243,7 +271,7 @@ namespace DoAnCnpm.Controllers
             }
 
             var cus = Session["ProfileCus"] as Customer;
-            if (cus.Gioitinh != 0) 
+            if (cus.Gioitinh != 0)
             {
                 ViewBag.VoucherMessage = "Chỉ khách hàng nữ mới được sử dụng phiếu giảm giá.";
                 return View(cart);
@@ -276,26 +304,27 @@ namespace DoAnCnpm.Controllers
             return View(cart);
         }
         public ActionResult CheckVoucher(string vouncher)
-{
-    // Xử lý mã voucher và tính toán giảm giá dựa trên mã voucher (vouncher)
-    decimal discountAmount = CalculateDiscountAmount(vouncher);
+        {
+            // Xử lý mã voucher và tính toán giảm giá dựa trên mã voucher (vouncher)
+            decimal discountAmount = CalculateDiscountAmount(vouncher);
 
-    if (discountAmount == -1)
-    {
-        return Content("Không tìm thấy voucher."); // Trả về thông báo nếu không tìm thấy voucher
-    }
+            if (discountAmount == -1)
+            {
+                return Content("Không tìm thấy voucher."); // Trả về thông báo nếu không tìm thấy voucher
+            }
 
-    return Content(""); // Trả về chuỗi rỗng nếu không có lỗi
-}
+            return Content(""); // Trả về chuỗi rỗng nếu không có lỗi
+        }
 
         public ActionResult FailureView()
         {
             return View();
         }
 
-        public ActionResult SuccessView() {
+        public ActionResult SuccessView()
+        {
             return View();
-                }
+        }
 
         public ActionResult PaymentWithPaypal(string Cancel = null)
         {
@@ -347,7 +376,7 @@ namespace DoAnCnpm.Controllers
                     }
                 }
             }
-            catch (Exception ex)
+            catch
             {
                 return View("FailureView");
             }
@@ -489,7 +518,5 @@ namespace DoAnCnpm.Controllers
             // Create a payment using a APIContext  
             return this.payment.Create(apiContext);
         }
-
-
     }
-} 
+}

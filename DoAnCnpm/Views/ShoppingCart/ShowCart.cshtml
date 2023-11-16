@@ -27,9 +27,10 @@
                 <th>Tên sản phẩm</th>
                 <th>Hình sản phẩm</th>
                 <th>Giá</th>
+                <th>Ngày thuê</th>
                 <th>Số lượng</th>
                 <th>Thành tiền</th>
-                <th></th>
+                <th>Hành động</th>
             </tr>
         </thead>
 
@@ -74,7 +75,8 @@
                 <td>
                     @using (Html.BeginForm("Payment", "Payment"))
                     {
-                        <input type="number" value="@Model.Total_money()" name="totalMoney" hidden />
+                        <input type="text" value="@Model.Total_money()" name="totalMoney" hidden />
+
                         <input type="submit" value="Thanh toán bằng VNPAY" class="khungtt" />
                     }
                 </td>
@@ -130,7 +132,7 @@
                             <tr>
                                 <td></td>
                                 <td>
-                                    <input type="submit" value="CheckOut" class="khungtt" />
+                                    <input type="submit" value="Thanh toán" class="khungtt" />
                                 </td>                           
                          </tr>
                             <tr>

@@ -8,9 +8,23 @@ namespace DoAnCnpm.Controllers
 {
     public class PaymentController : Controller
     {
+        public ActionResult PaymentStatus()
+        {
+            try
+            {
+                VNPayReturn vNPayReturn = new VNPayReturn();
+                vNPayReturn.ProcessResponses();
+
+                return View(vNPayReturn);
+            }
+            catch
+            {
+                return RedirectToAction("Index", "SkillIssue");
+            }
+        }
         // GET: Payment
         [HttpPost]
-        public ActionResult Payment(double totalMoney)
+        public ActionResult Payment(string totalMoney)
         {
             //Get Config Info
             string vnp_Returnurl = ConfigurationManager.AppSettings["vnp_Returnurl"]; //URL nhan ket qua tra ve 
@@ -23,7 +37,8 @@ namespace DoAnCnpm.Controllers
             vnpay.AddRequestData("vnp_Version", VnPayLibrary.VERSION);
             vnpay.AddRequestData("vnp_Command", "pay");
             vnpay.AddRequestData("vnp_TmnCode", vnp_TmnCode);
-            vnpay.AddRequestData("vnp_Amount", (totalMoney * 100).ToString()); // Nhân cho 100 để thêm 2 số 0 :) 
+            double total = double.Parse(totalMoney.Trim());
+            vnpay.AddRequestData("vnp_Amount", (total * 100).ToString()); // Nhân cho 100 để thêm 2 số 0 :) 
             vnpay.AddRequestData("vnp_BankCode", "VNBANK");
             vnpay.AddRequestData("vnp_CreateDate", DateTime.Now.ToString("yyyyMMddHHmmss"));
             vnpay.AddRequestData("vnp_CurrCode", "VND");
