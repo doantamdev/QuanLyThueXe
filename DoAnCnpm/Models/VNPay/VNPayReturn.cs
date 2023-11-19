@@ -32,7 +32,7 @@ namespace DoAnCnpm.Models.VNPay
         {
             if (Current.Request.QueryString.Count > 0)
             {
-                string vnp_HashSecret = HASH_SECRET; //ssssskill :))
+                string vnp_HashSecret = HASH_SECRET; 
                 var vnpayData = Current.Request.QueryString;
                 VnPayLibrary vnpay = new VnPayLibrary();
 
@@ -64,7 +64,7 @@ namespace DoAnCnpm.Models.VNPay
                     if (vnp_ResponseCode == TRANSAC_CODE && vnp_TransactionStatus == RESPONSE_CODE)
                     {
                         //Thanh toan thanh cong
-                        this.ReturnText = "Cảm ơn quý khách đã nạp VIP :D";
+                        this.ReturnText = "Chúc mừng quý khách thanh toán thành công";
 
                         return true;
                     }

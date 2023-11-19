@@ -79,7 +79,7 @@
                 </div>
                 <div class="col-lg-10 col-md-2 col-sm-2 col-xs-12" style="margin-top:10px">
                     <ul class="nav navbar-nav navbar-right" style="margin-right:30px">
-                        <li><a href="@Url.Action("ITestGD", "Home")"> <b style="color:black">Trang chủ</b></a></li>
+                        <li><a href="@Url.Action("Index", "Admin")"> <b style="color:black">Trang chủ</b></a></li>
                         <li><a href="@Url.Action("Index", "Product")"><b style="color:black">Xem xe</b></a></li>
                         <li><a href="#3"><b style="color:black">Liên hệ</b></a></li>
                         <li style="margin-top:14px">|</li>
@@ -150,6 +150,13 @@
                         </a>
                     </li>
                     <li>
+                        <a href="@Url.Action("Index", "Voucher")">
+                            <p class="groove">
+                                Quản lý vouncher
+                            </p>
+                        </a>
+                    </li>
+                    <li>
                         <a href="@Url.Action("GroupByTop3", "OrderDetail")">
                             <p class="groove">
                                 <span style="margin-left:5px">Xe đạt doanh thu cao nhất</span>
@@ -184,6 +191,7 @@
             </div>
         </div>
     </div>
+    <div style="margin-bottom:20px"></div>
     <div id="div-footer">
         <div class="row">
             <div class="col-sm-4">

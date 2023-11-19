@@ -167,6 +167,7 @@ namespace DoAnCnpm.Controllers
             return View();
         }
 
+
         public ActionResult QuanLyDonHang()
         {
             return View(database.OrderProes.ToList());
@@ -439,7 +440,7 @@ namespace DoAnCnpm.Controllers
             }
             //on successful payment, show success page to user.  
             //return View("SuccessView");
-            return RedirectToAction("CheckOut_Success", "ShoppingCart");
+            return RedirectToAction("SuccessView", "ShoppingCart");
         }
         private PayPal.Api.Payment payment;
         private Payment ExecutePayment(APIContext apiContext, string payerId, string paymentId)

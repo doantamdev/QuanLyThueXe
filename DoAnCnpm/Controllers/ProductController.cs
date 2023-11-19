@@ -72,7 +72,7 @@
                 ViewBag.listCategory = new SelectList(list, "IDCate", "NameCate", 1);
                 database.Products.Add(pro);
                 database.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("QuanLyXe");
             }
             catch
             {

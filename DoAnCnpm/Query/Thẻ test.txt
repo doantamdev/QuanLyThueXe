@@ -1,4 +1,7 @@
-﻿Thông tin thẻ test
+﻿
+
+VNPay
+
 #	Thông tin thẻ	Ghi chú
 1	
 Ngân hàng: NCB
@@ -31,3 +34,13 @@ Số thẻ: 9704194841945513
 Tên chủ thẻ:NGUYEN VAN A
 Ngày phát hành:07/15
 Thẻ bị hết hạn
+
+
+----------
+
+Paypal
+
+Số thẻ:  sb-hm3sa27949259@personal.example.com
+Pass:    150203T@m
+
+sb-lign927942756@business.example.com
