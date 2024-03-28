@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    @*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">*@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <!-- jQuery -->
@@ -10,14 +10,17 @@
 
     <!-- Bootstrap JS -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
     <meta charset="utf-8" />
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
     <title>@ViewBag.Title</title>
-    <link href="~/Content/mystyle.css" rel="stylesheet" />
     <script src="~/Scripts/script.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,600;1,400&family=Poppins:wght@100;300;400&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/Content/mystyle.css" />
     <style>
         p.ridge {
             border-style: ridge;
@@ -54,56 +57,100 @@
     </style>
 </head>
 <body>
-    <div id="div-headtop">
-        <div class="logotrai">
+    <div class="head-top">
+        <div class="logo">
             <a class="">
-                <img src="~/Content/images/loge-headtop3.jpg" style="height:50px; width:100px;float:left;margin-top:10px;margin-left:40px">
+                <img src="~/Content/images/loge-headtop3.jpg" style="height:50px; width:100px">
             </a>
             <a class="">
-                <img src="~/Content/images/thuexelink.jpg" style="height:50px; width:80px;float:left;margin-top:10px;margin-left:20px">
+                <img src="~/Content/images/thuexelink.jpg" style="height:50px; width:80px">
             </a>
         </div>
-        <p class="chuheadtop">
-            <span>Nơi Cung Cấp Xe Nhanh - Đẹp - Rẻ-Chất Lượng</span> <br>
+        <p class="head-text">
+            <span>Nơi Cung Cấp Xe Nhanh - Đẹp - Rẻ-Chất Lượng</span>
             <span style="font-size:15px">Đưa Bạn Đến Mọi Nẻo Đường</span>
         </p>
     </div>
-    <div id="div-top">
 
-        <div class="edittop">
-            <div class="row">
-                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
-                    <a href="@Url.Action("Index", "Home")">
-                        <img src="~/Content/images/miotologo.png" style="height:100%; width:100px;float:left;margin-top:30px;margin-left:120px">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+        <a class="navbar-brand" href="@Url.Action("Index", "Home")">
+            <img src="~/Content/images/miotologo.png" width="150" alt="" loading="lazy">
+        </a>
+
+        <div class="menu collapse navbar-collapse" id="navbarNav">
+            <ul class="menu-item-left navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="@Url.Action("Index", "Admin")">
+                        Trang chủ
+                        <span class="sr-only">(current)</span>
                     </a>
-                </div>
-                <div class="col-lg-10 col-md-2 col-sm-2 col-xs-12" style="margin-top:10px">
-                    <ul class="nav navbar-nav navbar-right" style="margin-right:30px">
-                        <li><a href="@Url.Action("Index", "Admin")"> <b style="color:black">Trang chủ</b></a></li>
-                        <li><a href="@Url.Action("Index", "Product")"><b style="color:black">Xem xe</b></a></li>
-                        <li><a href="#3"><b style="color:black">Liên hệ</b></a></li>
-                        <li style="margin-top:14px">|</li>
-                        @if (Session["ID"] != null)
-                        {
-                            <li>
-                                <a href="@Url.Action("LogOut", "Admin")"> <span class="glyphicon glyphicon-user" style="color:black"></span><b style="color:black">&nbsp Đăng xuất</b></a>
-                            </li>
-                        }
-                        else
-                        {
-                            <li>
-                                <a href="@Url.Action("RegisterAdmin", "Admin")"><span class="glyphicon glyphicon-user" style="color:black"></span><b style="color:black">&nbsp Đăng ký</b></a>
-                            </li>
-                            <li>
-                                <a href="@Url.Action("Index", "Admin")" class="double"><span class="glyphicon glyphicon-log-in" style="color:black"></span> <b style="color:black">&nbsp Đăng Nhập Quản trị</b></a>
-                            </li>
-                        }
-                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Index", "Product")">Xem xe</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Liên hệ</a>
+                </li>
+            </ul>
+
+            <ul class="menu-item-right navbar-nav">
+                <li class="nav-item">
+                    <a class="cart-icon nav-link" href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-basket2-fill" viewBox="0 0 16 16">
+                            <path d="M5.929 1.757a.5.5 0 1 0-.858-.514L2.217 6H.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h.623l1.844 6.456A.75.75 0 0 0 3.69 15h8.622a.75.75 0 0 0 .722-.544L14.877 8h.623a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1.717L10.93 1.243a.5.5 0 1 0-.858.514L12.617 6H3.383L5.93 1.757zM4 10a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0zm3 0a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0zm4-1a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1" />
+                        </svg>
+                    </a>
+                </li>
+                <li class="sign-in-button btn btn-dark nav-item active">
+                    <a class="nav-link" href="#">
+                        Đăng nhập
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="register-button btn nav-item">
+                    <a class="nav-link" href="@Url.Action("RegisterAdmin", "Admin")">
+                        Đăng ký
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    @*<div id="div-top">
+            <div class="edittop">
+                <div class="row">
+                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                        <a href="@Url.Action("Index", "Home")">
+                            <img src="~/Content/images/miotologo.png" style="height:100%; width:100px;float:left;margin-top:30px;margin-left:120px">
+                        </a>
+                    </div>
+                    <div class="col-lg-10 col-md-2 col-sm-2 col-xs-12" style="margin-top:10px">
+                        <ul class="nav navbar-nav navbar-right" style="margin-right:30px">
+                            <li><a href="@Url.Action("Index", "Admin")"> <b style="color:black">Trang chủ</b></a></li>
+                            <li><a href="@Url.Action("Index", "Product")"><b style="color:black">Xem xe</b></a></li>
+                            <li><a href="#3"><b style="color:black">Liên hệ</b></a></li>
+                            <li style="margin-top:14px">|</li>
+                            @if (Session["ID"] != null)
+                            {
+                                <li>
+                                    <a href="@Url.Action("LogOut", "Admin")"> <span class="glyphicon glyphicon-user" style="color:black"></span><b style="color:black">&nbsp Đăng xuất</b></a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li>
+                                    <a href="@Url.Action("RegisterAdmin", "Admin")"><span class="glyphicon glyphicon-user" style="color:black"></span><b style="color:black">&nbsp Đăng ký</b></a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("Index", "Admin")" class="double"><span class="glyphicon glyphicon-log-in" style="color:black"></span> <b style="color:black">&nbsp Đăng Nhập Quản trị</b></a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
 
-    </div>
+        </div>*@
 
     <div id="div-top-end"></div>
 
@@ -297,5 +344,8 @@
         </div>
     </div>
     @RenderSection("scripts", false)
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 </body>
 </html>

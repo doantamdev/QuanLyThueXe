@@ -1,20 +1,16 @@
-﻿    using DoAnCnpm.Models;
-    using System;
-    using System.Collections.Generic;
-    using System.Data.Entity;
-    using System.IO;
-    using System.Linq;
-    using System.Web;
-    using System.Web.Mvc;
-    using PagedList;
-    using PagedList.Mvc;
-    using System.Net;
-    using System.Drawing.Printing;
-    using System.Runtime.InteropServices;
-    using DoAnCnpm.Models.CommentViewModal;
+﻿using DoAnCnpm.Models;
+using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.IO;
+using System.Linq;
+using System.Web.Mvc;
+using PagedList;
+using System.Net;
+using DoAnCnpm.Models.CommentViewModal;
 
-    namespace DoAnCnpm.Controllers
-    {
+namespace DoAnCnpm.Controllers
+{
     public class ProductController : Controller
     {
         DoAnPMEntities database = new DoAnPMEntities();
@@ -25,6 +21,21 @@
             int pageSize = 8;
             int pageNum = (page ?? 1);
             IQueryable<Product> productList = database.Products;
+
+            //Lấy danh sách từng sản phẩm theo danh mục
+            List<Product> Xe2Banhs = database.Products.Where(p => p.Category == "001").Take(5).ToList();
+            List<Product> Xe4Banhs = database.Products.Where(p => p.Category == "002").Take(5).ToList();
+            List<Product> XeKhachs = database.Products.Where(p => p.Category == "003").Take(5).ToList();
+            List<Product> XeDaps = database.Products.Where(p => p.Category == "1236").Take(5).ToList();
+            List<Product> XeVanChuyens = database.Products.Where(p => p.Category == "1523").Take(5).ToList();
+
+            var listProduct = new ListProduct {
+                Xe2Banh = Xe2Banhs,
+                Xe4Banh = Xe4Banhs,
+                XeKhach = XeKhachs,
+                XeDap = XeDaps,
+                XeVanChuyen = XeVanChuyens
+            };
 
             // Lọc theo tên sản phẩm
             if (!string.IsNullOrEmpty(_name))
@@ -38,7 +49,7 @@
             // Sắp xếp theo tên sản phẩm
             productList = productList.OrderByDescending(p => p.NamePro);
 
-            return View(productList.ToPagedList(pageNum, pageSize));
+            return View(listProduct);
         }
 
         public ActionResult Create()
@@ -174,13 +185,29 @@
         }
 
 
-        public ActionResult GetProductsByCateId(int id, int? page)
+        public ActionResult ProductList(int id, int? page, string _name, decimal min = decimal.MinValue, decimal max = decimal.MaxValue)
         {
             //Kích thước trang
             int pageSize = 8;
             int pageNum = (page ?? 1);
-            var products = database.Products.Where(p => p.Category1.Id == id).ToList();
-            return View("Index", products.ToPagedList(pageNum, pageSize));
+            IQueryable<Product> products = database.Products.Where(p => p.Category1.Id == id);
+
+            var cate = database.Categories.FirstOrDefault(c => c.Id == id);
+            Session["cateName"] = cate.NameCate;
+
+            // Lọc theo tên sản phẩm
+            if (!string.IsNullOrEmpty(_name))
+            {
+                products = products.Where(p => p.NamePro.Contains(_name));
+            }
+
+            // Lọc theo giá
+            products = products.Where(p => p.Price >= min && p.Price <= max);
+
+            // Sắp xếp theo tên sản phẩm
+            products = products.OrderByDescending(p => p.NamePro);
+
+            return View(products.ToPagedList(pageNum, pageSize));
         }
 
         public ActionResult GetProductsByCategory()

@@ -4,9 +4,20 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery.unobtrusive-ajax.min.js"></script>
 
+
 <style>
     .text-red {
         color: yellow;
+    }
+    .delete-comment {
+        padding: 5px 10px;
+        border-radius: 5px;
+        background: #004643;
+        color: #fff;
+        margin: 10px 0 0 0;
+    }
+    .delete-comment:hover {
+        opacity: 0.8;
     }
 </style>
 
@@ -15,21 +26,27 @@
     <div>
         @foreach (var comment in Model)
         {
-            <p>
-                <strong>Tên người dùng:</strong> @comment.UserName
-            </p>
-            <p>
-                <strong>Nội dung bình luận:</strong> @comment.CommentMsg
-            </p>
-            <p>
-                <strong>Đánh giá:</strong> @Html.Raw(ConvertToStars(comment.Rate, "text-red"))
-            </p>
-            <p>
-                @if (Session["UserId"] != null && (int)Session["UserId"] == comment.UserID)
-                {
-                    <button class="delete-comment" data-commentid="@comment.ID" onclick="deleteComment(@comment.ID, this)">Xóa</button>
-                }
-            </p>
+            <li class="comment-item">
+                <div class="comment-item-head">
+                    <span class="comment-name">
+                        @comment.UserName
+                    </span>
+
+                    <span class="comment-star">
+                        @Html.Raw(ConvertToStars(comment.Rate, "text-red"))
+                    </span>
+                </div>
+
+                <div class="comment-item-content">
+                    @comment.CommentMsg
+                </div>
+                <p>
+                    @if (Session["UserId"] != null && (int)Session["UserId"] == comment.UserID)
+                    {
+                        <button class="delete-comment" data-commentid="@comment.ID" onclick="deleteComment(@comment.ID, this)">Xóa</button>
+                    }
+                </p>
+            </li>
         }
     </div>
 }

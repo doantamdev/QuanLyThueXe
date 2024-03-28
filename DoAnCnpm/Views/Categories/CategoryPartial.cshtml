@@ -1,40 +1,40 @@
 ﻿@model IEnumerable<DoAnCnpm.Models.Category>
 
+
 <style>
-    #div-u {
-        padding-top: 30px;
-        margin-top: 20px;
-        background-color: cornflowerblue;
-        text-decoration: none;
+    .cates {
+        padding: 0 20px;
+        border-right: 1px solid #dadada;
     }
 
-    .div-cate {
-        height: 30px;
-        width: 100%;
+    .cate-item {
+        border-bottom: 1px solid #dadada;
     }
 
-        .div-cate a {
-            color: yellow;
+        .cate-item .a {
+            color: #000;
+            font-size: 18px;
             text-decoration: none;
-            font-size: large;
         }
 
-            .div-cate a:hover {
-                color: chartreuse;
-                text-decoration: none;
+        .cate-item:hover {
+            background-color: #5fcf86;
+            transition: all 0.3s ease-in-out;
+        }
+
+            .cate-item:hover .a {
+                color: #fff;
             }
 </style>
-<br />
-<h3 style="color:darkred; text-align:center;">Danh mục Loại SP</h3>
-<ul style="list-style-type:none" id="div-u">
-    @{ 
-        foreach(var item in Model)
-            {
-                <li class="div-cate">
-                    @Html.ActionLink(item.NameCate, "Index", "Product", new { category = item.NameCate.Trim()},"")
-                </li>
-                <hr />
-            }
+
+<ul class="cates nav flex-column">
+    @{
+        foreach (var item in Model)
+        {
+            <li class="cate-item nav-item">
+                @Html.ActionLink(item.NameCate, "Index", "Product", new { @class= "nav-link active", category = item.NameCate.Trim() }, "")
+            </li>
+        }
     }
 </ul>
 

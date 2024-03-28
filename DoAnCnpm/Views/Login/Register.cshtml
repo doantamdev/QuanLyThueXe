@@ -1,125 +1,212 @@
 ﻿@model DoAnCnpm.Models.Customer
 
-<style>
-    .field-validation-error {
-        color: red;
-    }
-
-    #form-register {
-        position: absolute;
-        margin-top: 10px;
-        left: 30px;
-        border: 1px solid #ccc;
-        padding: 10px 10px;
-        margin-bottom: 100px;
-    }
-
-    table {
-        width: 560px;
-        height: 300px;
-    }
-
-    .title-form {
-        text-align: center;
-        font-size: 30px;
-    }
-</style>
 
 @{
     ViewBag.Title = "Register";
     Layout = "~/Views/Shared/Dangky.cshtml";
 }
 
-<div id="form-register">
+
+@using (Html.BeginForm("Register", "Login", FormMethod.Post, new {@class= "register" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="register-container">
+        <div class="register-side d-flex flex-column align-items-center justify-content-center">
+            <h1 class="fs-3 fw-bold">
+                Đăng kí
+            </h1>
+
+            <div class="form">
+
+                <div style="width: 100%;" class="d-flex align-items-center justify-content-center">
+                    <div class="form-group">
+                        @*<input type="text" placeholder="Nhập tên người dùng...">*@
+                        @Html.TextBoxFor(m => m.NameCus, new {placeholder="Nhập tên người dùng..."})
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                            <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
+                        </svg>
+                    </div>
+
+                    <div class="form-group">
+                        @*<input type="text" placeholder="Nhập tài khoản...">*@
+                        @Html.TextBoxFor(m => m.UserCus, new {placeholder="Nhập tên tài khoản..."})
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                            <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
+                        </svg>
+                    </div>
+                </div>
+
+                <div style="width: 100%;" class="d-flex align-items-center justify-content-center">
+                    <div class="form-group">
+                        @*<input type="text" placeholder="Nhập gmail...">*@
+                        @Html.TextBoxFor(m => m.EmailCus, new {placeholder="Nhập gmail..."})
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                            <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
+                        </svg>
+                    </div>
+
+                    <div class="form-group">
+                        @*<input type="text" placeholder="Nhập số điện thoại...">*@
+                        @Html.TextBoxFor(m => m.PhoneCus, new {placeholder="Nhập số điện thoại..."})
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                            <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
+                        </svg>
+                    </div>
+                </div>
+
+                <div style="width: 100%;" class="d-flex align-items-center justify-content-center">
+                    <div class="form-group">
+                        @*<input type="text" placeholder="Nhập địa chỉ...">*@
+                        @Html.TextBoxFor(m => m.Diachi, new {placeholder="Nhập địa chỉ..."})
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                            <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
+                        </svg>
+                    </div>
+
+                    <div class="form-group">
+                        @*<input style="width: 95%;" type="date" placeholder="Nhập ngày sinh...">*@
+                        @Html.EditorFor(m => m.Ngaysinh, new { htmlAttributes = new { @type = "date", @style = "width:100%" } })
+                    </div>
+                </div>
+
+                <div style="margin: 0 0 30px 0;" class="d-flex align-items-center justify-content-start">
+                    <label style="margin: 0 10px 0 0;;" for="">Giới tính: </label>
+
+                    <div style="margin: 0 15px 0 0">
+                        @Html.RadioButtonFor(m => m.Gioitinh, 1, true) Nam
+                    </div>
+                    @Html.RadioButtonFor(m => m.Gioitinh, 0) Nữ
+                </div>
+
+                <div style="width: 100%;" class="d-flex align-items-center justify-content-center">
+                    <div class="form-group">
+                        @*<input class="input-pass" type="password" placeholder="Nhập mật khẩu....">*@
+                        @Html.PasswordFor(m => m.PassCus, new { placeholder = "Nhập mật khẩu...." })
+                        <svg class="eye-pass-off eye-show" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-slash-fill" viewBox="0 0 16 16">
+                            <path d="m10.79 12.912-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7 7 0 0 0 2.79-.588M5.21 3.088A7 7 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474z" />
+                            <path d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829zm4.95.708-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6-12-12 .708-.708 12 12z" />
+                        </svg>
+                        <svg class="eye-pass-show eye-off" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                            <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0" />
+                            <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7" />
+                        </svg>
+                    </div>
+                    <div class="form-group">
+                        @*<input class="input-pass" type="password" placeholder="Nhập lại mật khẩu....">*@
+                        @Html.PasswordFor(m => m.ConfirmPassCus, new { placeholder = "Nhập lại mật khẩu...." })
+                        <svg class="eye-pass-off eye-show" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-slash-fill" viewBox="0 0 16 16">
+                            <path d="m10.79 12.912-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7 7 0 0 0 2.79-.588M5.21 3.088A7 7 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474z" />
+                            <path d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829zm4.95.708-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6-12-12 .708-.708 12 12z" />
+                        </svg>
+                        <svg class="eye-pass-show eye-off" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                            <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0" />
+                            <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="register-btn">
+                Đăng kí
+            </button>
+
+            <a class="login-link" href="#">Đăng nhập</a>
+            <a style="margin: 5px 0 0 0;" class="login-link" href="@Url.Action("Authen","Login")">Trở về trang chủ</a>
+        </div>
+    </div>
+}
+
+@*<div id="form-register">
     @using (Html.BeginForm("Register", "Login", FormMethod.Post))
     {
         @Html.AntiForgeryToken()
-    <table>
-        <tr class="title-form">
-            <th colspan="2">Đăng ký tài khoản</th>
-        </tr>
-        <tr>
-            <td>Tên người dùng</td>
-            <td>@Html.TextBoxFor(m => m.NameCus, new { style = "width:100%" })</td>
-        </tr>
-        <tr>
-            <td colspan="2">@Html.ValidationMessageFor(m => m.NameCus)</td>
-        </tr>
-        <tr>
-            <td>Username</td>
-            <td>@Html.TextBoxFor(m => m.UserCus, new { style = "width:100%" })</td>
-        </tr>
-        <tr>
-            <td colspan="2">@Html.ValidationMessageFor(m => m.UserCus)</td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                @if (ViewBag.error != null)
-                {
-                    <span class="field-validation-error">@ViewBag.error</span>
-                }
-            </td>
-        </tr>
-        <tr>
-            <td>Gmail</td>
-            <td>@Html.TextBoxFor(m => m.EmailCus, new { style = "width:100%" })</td>
-        </tr>
-        <tr>
-            <td colspan="2">@Html.ValidationMessageFor(m => m.EmailCus)</td>
-        </tr>
-        <tr>
-            <td>Phone</td>
-            <td>@Html.TextBoxFor(m => m.PhoneCus, new { style = "width:100%" })</td>
-        </tr>
-        <tr>
-            <td colspan="2">@Html.ValidationMessageFor(m => m.PhoneCus)</td>
-        </tr>
-        <tr>
-            <td>Địa chỉ</td>
-            <td>@Html.TextBoxFor(m => m.Diachi, new { style = "width:100%" })</td>
-        </tr>
-        <tr>
-            <td>Ngày Sinh</td>
-            <td>@Html.EditorFor(m => m.Ngaysinh, new { htmlAttributes = new { @type = "date", @style = "width:100%" } })</td>
-        </tr>
-        <tr>
-            <td colspan="2">@Html.ValidationMessageFor(m => m.Ngaysinh)</td>
-        </tr>
-        <tr>
-            <td>Giới Tính</td>
-            <td>
-                @Html.RadioButtonFor(m => m.Gioitinh, 1) Nam
-                @Html.RadioButtonFor(m => m.Gioitinh, 0) Nữ
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2">@Html.ValidationMessageFor(m => m.Gioitinh)</td>
-        </tr>
-        <tr>
-            <td>Password</td>
-            <td>@Html.PasswordFor(m => m.PassCus, new { style = "width:100%" })</td>
-        </tr>
-        <tr>
-            <td colspan="2">@Html.ValidationMessageFor(m => m.PassCus)</td>
-        </tr>
-        <tr>
-            <td>Confirm Password</td>
-            <td>@Html.PasswordFor(m => m.ConfirmPassCus, new { style = "width:100%" })</td>
-        </tr>
-        <tr>
-            <td colspan="2">@Html.ValidationMessageFor(m => m.ConfirmPassCus)</td>
-        </tr>
-        <tr>
-            <td>
-            </td>
-            <td>
-                <input class="btn btn-primary" type="submit" value="Register" />
-                <a class="btn btn-primary" href="@Url.Action("Authen","Login")">Đăng nhập</a>
-            </td>
-        </tr>
-    </table>
+        <table>
+            <tr class="title-form">
+                <th colspan="2">Đăng ký tài khoản</th>
+            </tr>
+            <tr>
+                <td>Tên người dùng</td>
+                <td>@Html.TextBoxFor(m => m.NameCus, new { style = "width:100%" })</td>
+            </tr>
+            <tr>
+                <td colspan="2">@Html.ValidationMessageFor(m => m.NameCus)</td>
+            </tr>
+            <tr>
+                <td>Username</td>
+                <td>@Html.TextBoxFor(m => m.UserCus, new { style = "width:100%" })</td>
+            </tr>
+            <tr>
+                <td colspan="2">@Html.ValidationMessageFor(m => m.UserCus)</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    @if (ViewBag.error != null)
+                    {
+                        <span class="field-validation-error">@ViewBag.error</span>
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td>Gmail</td>
+                <td>@Html.TextBoxFor(m => m.EmailCus, new { style = "width:100%" })</td>
+            </tr>
+            <tr>
+                <td colspan="2">@Html.ValidationMessageFor(m => m.EmailCus)</td>
+            </tr>
+            <tr>
+                <td>Phone</td>
+                <td>@Html.TextBoxFor(m => m.PhoneCus, new { style = "width:100%" })</td>
+            </tr>
+            <tr>
+                <td colspan="2">@Html.ValidationMessageFor(m => m.PhoneCus)</td>
+            </tr>
+            <tr>
+                <td>Địa chỉ</td>
+                <td>@Html.TextBoxFor(m => m.Diachi, new { style = "width:100%" })</td>
+            </tr>
+            <tr>
+                <td>Ngày Sinh</td>
+                <td>@Html.EditorFor(m => m.Ngaysinh, new { htmlAttributes = new { @type = "date", @style = "width:100%" } })</td>
+            </tr>
+            <tr>
+                <td colspan="2">@Html.ValidationMessageFor(m => m.Ngaysinh)</td>
+            </tr>
+            <tr>
+                <td>Giới Tính</td>
+                <td>
+                    @Html.RadioButtonFor(m => m.Gioitinh, 1) Nam
+                    @Html.RadioButtonFor(m => m.Gioitinh, 0) Nữ
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">@Html.ValidationMessageFor(m => m.Gioitinh)</td>
+            </tr>
+            <tr>
+                <td>Password</td>
+                <td>@Html.PasswordFor(m => m.PassCus, new { style = "width:100%" })</td>
+            </tr>
+            <tr>
+                <td colspan="2">@Html.ValidationMessageFor(m => m.PassCus)</td>
+            </tr>
+            <tr>
+                <td>Confirm Password</td>
+                <td>@Html.PasswordFor(m => m.ConfirmPassCus, new { style = "width:100%" })</td>
+            </tr>
+            <tr>
+                <td colspan="2">@Html.ValidationMessageFor(m => m.ConfirmPassCus)</td>
+            </tr>
+            <tr>
+                <td>
+                </td>
+                <td>
+                    <input class="btn btn-primary" type="submit" value="Register" />
+                    <a class="btn btn-primary" href="@Url.Action("Authen","Login")">Đăng nhập</a>
+                </td>
+            </tr>
+        </table>
     }
-</div>
+</div>*@
 
 
 

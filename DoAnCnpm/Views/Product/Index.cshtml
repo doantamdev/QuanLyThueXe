@@ -1,68 +1,281 @@
 ﻿@using DoAnCnpm.Models;
 @using PagedList.Mvc;
-@model PagedList.PagedList<Product>
+
+@model ListProduct
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/TrangDatXe.cshtml";
 }
 
-<link href="~/Content/showsp.css" rel="stylesheet" />
+<link rel="stylesheet" href="~/Content/mystyle.css" />
 
-<style>
-    .center-details {
-        display: inline-block;
-        text-align: center;
-        width: 100%;
-        color:white;
-        font-weight:bold;
-        padding:0.5rem;
-    }
-</style>
-
-<div id="div-ds"><h2 style="padding-top:10px;color:black"> <b>DANH SÁCH SẢN PHẨM</b></h2></div>
-<div id="div-ds-2"><h2 style="color:black"></h2></div>
-
-@using (Html.BeginForm("Index", "Product", FormMethod.Get))
+@*@using (Html.BeginForm("Index", "Product", FormMethod.Get))
 {
-    <table>
-        <tr>
-            <td>
+    <div class="input-component d-flex">
+        <div style="width: 300px; margin-right: 20px" class="input-group input-group-sm mb-3">
+            <input name="_name" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+            <div class="input-group-prepend">
+                <button name="Search" type="submit" style="background-color: #5fcf86; color: #fff;" class="submit-btn btn" id="inputGroup-sizing-sm">Tìm kiếm</button>
+            </div>
+        </div>
 
-                &nbsp; Tìm kiếm: <input type="text" name="_name" />
-                <input type="submit" name="Search" />
-            </td>
-            <td style="margin-left:100px">
-                &nbsp; Đơn giá từ: <input type="text" name="min" />
-                &nbsp; Đến:        <input type="text" name="max" />
-                <input type="submit" name="Tìm giá" />
-            </td>
-        </tr>
-    </table>
-}
+        <div style="width: 300px;" class="input-group input-group-sm mb-3">
+            <div class="input-group-prepend">
+                <span style="background: #5fcf86; color: #fff;" class="input-group-text">Giá từ</span>
+            </div>
 
+            <input name="min" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
 
-    <div class="container">
-        <div class="row">
-            @foreach (var pro in Model)
-            {
-                <div class="col-sm-12 col-sm-6 col-md-4 col-lg-3" style="margin-top:15px;">
-                    <div id="khungsp" style="border:1px solid gainsboro;width:250px;height:400px;padding:0.5rem">
-                        <div class="card-pro">
-                            <img src="@Url.Content(pro.ImagePro)" height="220" width="237" style="object-fit:cover" />
-                            <p style="margin-top:10px ; text-align:center"><b>@Html.DisplayFor(model => pro.NamePro) | @Html.DisplayFor(model => pro.Price) Ngàn</b></p>
-                            <p style="margin-left:5px"><b>Mẫu xe: <i style="color:orangered">@Html.DisplayFor(model => pro.MauXe)</i></b> </p>
-                            <p style="margin-left:5px;color:forestgreen"><img src="~/Content/images/location.png" id="address"> <b> @Html.DisplayFor(model => pro.Vitri) </b></p>
-                            <div id="khungtt">
-                                @Html.ActionLink("CHI TIẾT", "Details", new { id = pro.ProductID }, new { @class = "center-details" })
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            }
+            <div class="input-group-prepend">
+                <span style="background: #5fcf86; color: #fff;" class="input-group-text">đến</span>
+            </div>
+
+            <input name="max" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+
+            <div class="input-group-prepend">
+                <button name="Search" type="submit" style="background-color: #5fcf86; color: #fff;" class="submit-btn btn" id="inputGroup-sizing-sm">Tìm kiếm</button>
+            </div>
         </div>
     </div>
-                Trang @(Model.PageCount<Model.PageNumber ?0 : Model.PageNumber) /@Model.PageCount
-                <div class="MenuPage">
-                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
+}*@
+
+<div class="product-cate">
+    <div class="product-cate-banner">
+        <img src="~/Content/images/slide1.jpg" alt="">
+    </div>
+
+    <div class="product-cate-name">
+        Xe 2 bánh
+    </div>
+
+    <ul class="product-items">
+        @foreach (var xe2banh in Model.Xe2Banh)
+        {
+            <div class="product-item">
+                <div class="items-img">
+                    <img src="@Url.Content(xe2banh.ImagePro)" alt="">
                 </div>
+
+                <div class="item-container">
+                    <div class="item-name">
+                        @xe2banh.NamePro
+                    </div>
+
+                    <div class="item-price">
+                        @xe2banh.Price VND
+                    </div>
+
+                    <div class="item-info-group">
+                        <div class="location">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                                <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6" />
+                            </svg>
+                            @xe2banh.Vitri
+                        </div>
+
+                        <div class="type">
+                            Mẫu xe:
+                            <span>@xe2banh.MauXe</span>
+                        </div>
+                    </div>
+
+                    @Html.ActionLink("Xem chi tiết", "Details", new { id = xe2banh.ProductID }, new { @class = "place-btn" })
+                </div>
+            </div>
+        }
+
+    </ul>
+</div>
+
+<div class="product-cate">
+    <div class="product-cate-banner">
+        <img src="~/Content/images/slide1.jpg" alt="">
+    </div>
+
+    <div class="product-cate-name">
+        Xe 4 bánh
+    </div>
+
+    <ul class="product-items">
+        @foreach (var xe2banh in Model.Xe4Banh)
+        {
+            <div class="product-item">
+                <div class="items-img">
+                    <img src="@Url.Content(xe2banh.ImagePro)" alt="">
+                </div>
+
+                <div class="item-container">
+                    <div class="item-name">
+                        @xe2banh.NamePro
+                    </div>
+
+                    <div class="item-price">
+                        @xe2banh.Price VND
+                    </div>
+
+                    <div class="item-info-group">
+                        <div class="location">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                                <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6" />
+                            </svg>
+                            @xe2banh.Vitri
+                        </div>
+
+                        <div class="type">
+                            Mẫu xe:
+                            <span>@xe2banh.MauXe</span>
+                        </div>
+                    </div>
+
+                    @Html.ActionLink("Xem chi tiết", "Details", new { id = xe2banh.ProductID }, new { @class = "place-btn" })
+                </div>
+            </div>
+        }
+
+    </ul>
+</div>
+
+<div class="product-cate">
+    <div class="product-cate-banner">
+        <img src="~/Content/images/slide1.jpg" alt="">
+    </div>
+
+    <div class="product-cate-name">
+        Xe khách
+    </div>
+
+    <ul class="product-items">
+        @foreach (var xe2banh in Model.XeKhach)
+        {
+            <div class="product-item">
+                <div class="items-img">
+                    <img src="@Url.Content(xe2banh.ImagePro)" alt="">
+                </div>
+
+                <div class="item-container">
+                    <div class="item-name">
+                        @xe2banh.NamePro
+                    </div>
+
+                    <div class="item-price">
+                        @xe2banh.Price VND
+                    </div>
+
+                    <div class="item-info-group">
+                        <div class="location">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                                <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6" />
+                            </svg>
+                            @xe2banh.Vitri
+                        </div>
+
+                        <div class="type">
+                            Mẫu xe:
+                            <span>@xe2banh.MauXe</span>
+                        </div>
+                    </div>
+
+                    @Html.ActionLink("Xem chi tiết", "Details", new { id = xe2banh.ProductID }, new { @class = "place-btn" })
+                </div>
+            </div>
+        }
+
+    </ul>
+</div>
+
+<div class="product-cate">
+    <div class="product-cate-banner">
+        <img src="~/Content/images/slide1.jpg" alt="">
+    </div>
+
+    <div class="product-cate-name">
+        Xe đạp
+    </div>
+
+    <ul class="product-items">
+        @foreach (var xe2banh in Model.XeDap)
+        {
+            <div class="product-item">
+                <div class="items-img">
+                    <img src="@Url.Content(xe2banh.ImagePro)" alt="">
+                </div>
+
+                <div class="item-container">
+                    <div class="item-name">
+                        @xe2banh.NamePro
+                    </div>
+
+                    <div class="item-price">
+                        @xe2banh.Price VND
+                    </div>
+
+                    <div class="item-info-group">
+                        <div class="location">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                                <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6" />
+                            </svg>
+                            @xe2banh.Vitri
+                        </div>
+
+                        <div class="type">
+                            Mẫu xe:
+                            <span>@xe2banh.MauXe</span>
+                        </div>
+                    </div>
+
+                    @Html.ActionLink("Xem chi tiết", "Details", new { id = xe2banh.ProductID }, new { @class = "place-btn" })
+                </div>
+            </div>
+        }
+
+    </ul>
+</div>
+
+<div class="product-cate">
+    <div class="product-cate-banner">
+        <img src="~/Content/images/slide1.jpg" alt="">
+    </div>
+
+    <div class="product-cate-name">
+        Xe vận chuyển
+    </div>
+
+    <ul class="product-items">
+        @foreach (var xe2banh in Model.XeVanChuyen)
+        {
+            <div class="product-item">
+                <div class="items-img">
+                    <img src="@Url.Content(xe2banh.ImagePro)" alt="">
+                </div>
+
+                <div class="item-container">
+                    <div class="item-name">
+                        @xe2banh.NamePro
+                    </div>
+
+                    <div class="item-price">
+                        @xe2banh.Price VND
+                    </div>
+
+                    <div class="item-info-group">
+                        <div class="location">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                                <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6" />
+                            </svg>
+                            @xe2banh.Vitri
+                        </div>
+
+                        <div class="type">
+                            Mẫu xe:
+                            <span>@xe2banh.MauXe</span>
+                        </div>
+                    </div>
+
+                    @Html.ActionLink("Xem chi tiết", "Details", new { id = xe2banh.ProductID }, new { @class = "place-btn" })
+                </div>
+            </div>
+        }
+
+    </ul>
+</div>

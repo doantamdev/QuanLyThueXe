@@ -1,0 +1,96 @@
+﻿@using PagedList.Mvc;
+@model PagedList.PagedList<DoAnCnpm.Models.Product>
+
+@{
+    ViewBag.Title = "ProductList";
+    Layout = "~/Views/Shared/TrangDatXe.cshtml";
+}
+
+<link rel="stylesheet" href="~/Content/mystyle.css" />
+<link rel="stylesheet" href="~/Content/PagedList.css" />
+
+<div class="product-container">
+    <div class="container-header">
+        <p>
+            Danh sách sản phẩm / @Session["cateName"]
+        </p>
+
+        @using (Html.BeginForm("ProductList", "Product", FormMethod.Get, new {@class = "search-form"}))
+        {
+            <div class="search-input">
+                <button name="Search" type="submit" class="icon-search-name">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                    </svg>
+                </button>
+                <input name="_name" type="text" placeholder="Tìm kiếm...">
+            </div>
+
+            <div class="search-price">
+                <div class="search-price-from">
+                    <input name="min" type="text" placeholder="Giá từ">
+                </div>
+
+                <span> - </span>
+
+                <div class="input-price-group">
+                    <div class="search-price-to">
+                        <input name="max" type="text" placeholder="đến">
+
+                        <button name="Search" type="submit" class="icon-search-price">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <div class="product-container-list">
+        @foreach (var pro in Model)
+        {
+            <div class="product-item">
+                <div class="items-img">
+                    <img src="@Url.Content(pro.ImagePro)" alt="">
+                </div>
+
+                <div class="item-container">
+                    <div class="item-name">
+                        @pro.NamePro
+                    </div>
+
+                    <div class="item-price">
+                        @pro.Price VND
+                    </div>
+
+                    <div class="item-info-group">
+                        <div class="location">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                                <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6" />
+                            </svg>
+                            @pro.Vitri
+                        </div>
+
+                        <div class="type">
+                            Mẫu xe:
+                            <span>@pro.MauXe</span>
+                        </div>
+                    </div>
+
+                    <a class="place-btn" href="/ShoppingCart/AddToCart/@pro.ProductID">
+                        Thuê xe
+                    </a>
+                </div>
+            </div>
+        }
+
+    </div>
+
+    Trang @(Model.PageCount<Model.PageNumber ?0 : Model.PageNumber) /@Model.PageCount
+    <div class="pagination-container">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
+    </div>
+</div>
+

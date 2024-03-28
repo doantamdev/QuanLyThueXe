@@ -1,11 +1,12 @@
 ﻿@model IEnumerable<DoAnCnpm.Models.Category>
 
+<link rel=" stylesheet" href="~/Content/mystyle.css"/>
 
-<div>
-    <ul class="list-group">
-        @foreach (var item in Model)
-        {
-            @Html.ActionLink(item.NameCate, "GetProductsByCateId", "Product", new { id = item.Id }, new { @class = "list-group-item" })
-        }
-    </ul>
-</div>
+<ul class="cates nav flex-column">
+    @foreach (var item in Model)
+    {
+        <li class="cate-item nav-item">
+            @Html.ActionLink(item.NameCate, "ProductList", "Product", new { id = item.Id }, new { @class = "nav-link active" })
+        </li>
+     }
+</ul>

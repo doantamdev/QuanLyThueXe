@@ -1,262 +1,269 @@
-﻿<!DOCTYPE html>
+﻿﻿
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    @*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">*@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    @*<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>*@
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link href="~/Content/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+    <link href="~/Content/mystyle.css" />
+    @*<link href="~/Content/bootstrap.min.css" rel="stylesheet" />*@
     <meta charset="utf-8" />
     <title>@ViewBag.Title</title>
-    <link href="~/Content/bootstrap-datetimepicker.min.css" rel="stylesheet" />
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/Content/Site.css" rel="stylesheet" />
-    <link href="~/Content/mystye2.css" rel="stylesheet" />
-    <link href="~/Content/slide.css" rel="stylesheet" />
-    <link href="~/Content/buttononimage.css" rel="stylesheet" />
-
 </head>
 <body>
-    <div id="div-headtop">
-        <div class="logotrai">
+    <div class="head-top">
+        <div class="logo">
             <a class="">
-                <img src="~/Content/images/loge-headtop3.jpg" style="height:50px; width:100px;float:left;margin-top:10px;margin-left:40px">
+                <img src="~/Content/images/loge-headtop3.jpg" style="height:50px; width:100px">
             </a>
             <a class="">
-                <img src="~/Content/images/thuexelink.jpg" style="height:50px; width:80px;float:left;margin-top:10px;margin-left:20px">
+                <img src="~/Content/images/thuexelink.jpg" style="height:50px; width:80px">
             </a>
         </div>
-        <p class="chuheadtop">
-            <span>Nơi Cung Cấp Xe Nhanh - Đẹp - Rẻ-Chất Lượng</span> <br>
+        <p class="head-text">
+            <span>Nơi Cung Cấp Xe Nhanh - Đẹp - Rẻ-Chất Lượng</span>
             <span style="font-size:15px">Đưa Bạn Đến Mọi Nẻo Đường</span>
         </p>
     </div>
-    <div id="div-top">
 
-        <div class="edittop">
-            <div class="row">
-                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
-                    <a href="@Url.Action("TrangHome", "Home")">
-                        <img src="~/Content/images/miotologo.png" style="height:100%; width:100px;float:left;margin-top:30px;margin-left:120px">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+        <a class="navbar-brand" href="@Url.Action("TrangHome", "Home")">
+            BuyCarFaster
+        </a>
+
+        <div class="menu collapse navbar-collapse" id="navbarNav">
+            <ul class="menu-item-left navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("TrangHome", "Home")">Trang chủ</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="@Url.Action("Index", "Product")">Xem xe</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Liên hệ</a>
+                </li>
+            </ul>
+
+            <ul class="menu-item-right navbar-nav">
+                <li class="nav-item">
+                    <a class="cart-icon nav-link" href="/ShoppingCart/ShowCart">
+                        @*@Html.Action("BagCart", "ShoppingCart")*@
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-bag-fill" viewBox="0 0 16 16">
+                            <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4z" />
+                        </svg>
                     </a>
-                </div>
-                <div class="col-lg-10 col-md-2 col-sm-2 col-xs-12" style="margin-top:10px">
-                    <ul class="nav navbar-nav navbar-right" style="margin-right:30px">
-                        <li><a href="@Url.Action("TrangHome", "Home")"> <b style="color:black">Trang chủ</b></a></li>
-                        <li><a href="@Url.Action("Index", "Product")"><b style="color:black">Xem xe</b></a></li>
-                        <li><a href="#3"><b style="color:black">Liên hệ</b></a></li>
-                        <li style="margin-top:14px">|</li>
-                        @if (Session["IDCus"] != null)
-                        {
-                            <li>
-                                <a href="@Url.Action("Logout", "Login")"> <span class="glyphicon glyphicon-user" style="color:black"></span><b style="color:black">&nbsp Đăng xuất</b></a>
-                            </li>
+                </li>
+                @if (Session["IDCus"] != null)
+                {
+                    <li class="nav-item active">
+                        <a class="nav-link" href="@Url.Action("Logout", "Login")">
+                            Đăng xuất
+                        </a>
+                    </li>
 
+                    <li class="nav-item active">
+                        <a class="nav-link" href="@Url.Action("About", "Home")">
+                            Tài khoản
+                        </a>
+                    </li>
+                }
+                else
+                {
+                    <li class="login nav-item active">
+                        <a class="nav-link" href="@Url.Action("Authen", "Login")">
+                            Đăng nhập
+                        </a>
+                    </li>
+                }
+
+            </ul>
+        </div>
+    </nav>
+
+    <div style="display: flex; padding: 20px 40px;">
+        <div class="category">
+            <h5 style="padding: 0 16px; font-weight: bold; color: #fff;">Danh mục</h5>
+
+            @Html.Action("GetProductsByCategory", "Product")
+
+        </div>
+        <div class="intro-side">
+            <div class="about">
+                <div class="about-item">
+                    <svg class="about-icon" xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-truck" viewBox="0 0 16 16">
+                        <path d="M0 3.5A1.5 1.5 0 0 1 1.5 2h9A1.5 1.5 0 0 1 12 3.5V5h1.02a1.5 1.5 0 0 1 1.17.563l1.481 1.85a1.5 1.5 0 0 1 .329.938V10.5a1.5 1.5 0 0 1-1.5 1.5H14a2 2 0 1 1-4 0H5a2 2 0 1 1-3.998-.085A1.5 1.5 0 0 1 0 10.5zm1.294 7.456A2 2 0 0 1 4.732 11h5.536a2 2 0 0 1 .732-.732V3.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .294.456M12 10a2 2 0 0 1 1.732 1h.768a.5.5 0 0 0 .5-.5V8.35a.5.5 0 0 0-.11-.312l-1.48-1.85A.5.5 0 0 0 13.02 6H12zm-9 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2m9 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2" />
+                    </svg>
+
+                    <span class="about-text">
+                        Giao hàng
+                        <p>siêu nhanh</p>
+                    </span>
+                </div>
+                <div class="about-item">
+                    <svg class="about-icon" xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                    </svg>
+
+                    <span class="about-text">
+                        Uy tín
+                        <p>chất lượng</p>
+                    </span>
+                </div>
+                <div class="about-item">
+                    <svg class="about-icon" xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-telephone-inbound-fill" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877zM15.854.146a.5.5 0 0 1 0 .708L11.707 5H14.5a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5v-4a.5.5 0 0 1 1 0v2.793L15.146.146a.5.5 0 0 1 .708 0" />
+                    </svg>
+
+                    <span class="about-text">
+                        Hỗ trợ
+                        <p>nhiệt tính</p>
+                    </span>
+                </div>
+                <div class="about-item">
+                    <svg class="about-icon" xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-coin" viewBox="0 0 16 16">
+                        <path d="M5.5 9.511c.076.954.83 1.697 2.182 1.785V12h.6v-.709c1.4-.098 2.218-.846 2.218-1.932 0-.987-.626-1.496-1.745-1.76l-.473-.112V5.57c.6.068.982.396 1.074.85h1.052c-.076-.919-.864-1.638-2.126-1.716V4h-.6v.719c-1.195.117-2.01.836-2.01 1.853 0 .9.606 1.472 1.613 1.707l.397.098v2.034c-.615-.093-1.022-.43-1.114-.9zm2.177-2.166c-.59-.137-.91-.416-.91-.836 0-.47.345-.822.915-.925v1.76h-.005zm.692 1.193c.717.166 1.048.435 1.048.91 0 .542-.412.914-1.135.982V8.518z" />
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                        <path d="M8 13.5a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11m0 .5A6 6 0 1 0 8 2a6 6 0 0 0 0 12" />
+                    </svg>
+
+                    <span class="about-text">
+                        Thanh toán
+                        <p>nhanh ch</p>
+                    </span>
+                </div>
+            </div>
+
+            <div class="banner">
+            </div>
+        </div>
+    </div>
+
+    <div class="product">
+        @RenderBody()
+    </div>
+
+    @*<div class="product-side">
+            <h3 style="font-weight: bold;">Sản phẩm</h3>
+
+            @RenderBody()
+        </div>*@
+
+    <div id="div-footer">
+        <div class="row">
+            <div class="col-sm-4">
+                <div id="list-store">
+                    <h4 style="text-align:center; color:aliceblue"><b>Các chi nhánh thuê xe</b></h4>
+                    <div id="format-address">
+                        <ul>
                             <li>
-                                <a href="@Url.Action("About", "Home")"> <span class="glyphicon glyphicon-user" style="color:black"></span><b style="color:black">&nbsp Tài khoản</b></a>
-                            </li>
-                        }
-                        else
-                        {
-                            <li>
-                                <a href="@Url.Action("Register", "Login")"><span class="glyphicon glyphicon-user" style="color:black"></span><b style="color:black">&nbsp Đăng ký</b></a>
+                                <img src="~/Content/images/address.png" id="address">
+                                <span id="address-span"><b>TP.HCM - Quận 1:</b> 180 Trần Hưng Đạo P. Nguyễn Cư Trinh</span>
                             </li>
                             <li>
-                                <a href="@Url.Action("Authen", "Login")" class="double"><span class="glyphicon glyphicon-log-in" style="color:black"></span> <b style="color:black">&nbsp Đăng Nhập</b></a>
+                                <img src="~/Content/images/address.png" id="address">
+                                <span id="address-span"><b>TP.HCM - Quận 1:</b> 37 Lý Tự Trọng, P. Bến Nghé</span>
                             </li>
-                        }
-                        <li>
-                            <a href="/ShoppingCart/ShowCart">
-                                <img src="@Url.Content("~/Content/images/cart2.png")" style="height:30px;width:40px" />
-                            </a>
-                        </li>
-                        @Html.Action("BagCart", "ShoppingCart")
+                            <li>
+                                <img src="~/Content/images/address.png" id="address">
+                                <span id="address-span"><b>TP.HCM - Quận 2:</b> 16 Quốc Hương, P.Thảo Điền</span>
+                            </li>
+                            <li>
+                                <img src="~/Content/images/address.png" id="address">
+                                <span id="address-span"><b>TP.HCM - Quận 7:</b> 103A Nguyễn Thị Thập, P. Tân Phú</span>
+                            </li>
+                            <li>
+                                <img src="~/Content/images/address.png" id="address">
+                                <span id="address-span"><b>TP.HCM - Quận 7:</b> 954 Nguyễn Văn Linh, P. Tân Phong</span>
+                            </li>
+                            <li>
+                                <img src="~/Content/images/address.png" id="address">
+                                <span id="address-span"><b>TP.HCM - Quận 7:</b> Lotte Mart 469 Nguyễn Hữu Thọ, P. Tân Phong</span>
+                            </li>
+                            <li>
+                                <img src="~/Content/images/address.png" id="address">
+                                <span id="address-span"><b>TP.HCM - Quận 10:</b> 235-241 Nguyễn Tri Phương, P. 5</span>
+                            </li>
+                            <li>
+                                <img src="~/Content/images/address.png" id="address">
+                                <span id="address-span"><b>TP.HCM - Quận 11:</b> 94 Hòa Bình, P. 5</span>
+                            </li>
+                            <li>
+                                <img src="~/Content/images/address.png" id="address">
+                                <span id="address-span"><b>TP.HCM - Quận Gò Vấp:</b> 1031 Phan Văn Trị, P.10</span>
+                            </li>
+                            <li>
+                                <img src="~/Content/images/address.png" id="address">
+                                <span id="address-span"><b>TP.HCM - Quận Gò Vấp:</b> Lotte Mart 242 Nguyễn Văn Lượng, P.10</span>
+                            </li>
+                            <li>
+                                <img src="~/Content/images/address.png" id="address">
+                                <span id="address-span"><b>TP.HCM - Quận Tân Phú:</b> 367 Tân Sơn Nhì, P.Tân Thành</span>
+                            </li>
+                            <li>
+                                <img src="~/Content/images/address.png" id="address">
+                                <span id="address-span"><b>HÀ NỘI - Quận Tây Hồ:</b> 38 An Dương Vương, Phú Thượng, Tây Hồ</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div id="view-address">
+                        <a href="#">
+                            <div style="text-align: center; color: orangered;">
+                                <b>Xem thêm các địa chỉ khác</b>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div style="text-align: left; color: aliceblue">
+                    <h4>DANH MỤC</h4>
+                    <ul class="a">
+                        <li style="list-style-type: circle">Trang Chủ</li>
+                        <li style="list-style-type: circle">Thuê ngay</li>
+                        <li style="list-style-type: circle">Khuyến Mãi</li>
+                        <li style="list-style-type: circle">Tuyển dụng</li>
+                        <li style="list-style-type: circle">Liên hệ</li>
+                        <li style="list-style-type: circle">Giới thiệu</li>
                     </ul>
                 </div>
             </div>
-        </div>
+            <div class="col-sm-3">
+                <div style="text-align: left; color: aliceblue">
+                    <h4 style="margin-top:10px">CHĂM SÓC KHÁCH HÀNG</h4>
+                    <ul class="a">
+                        <li style="list-style-type: circle;">Hoàn tất thủ tục trong 15 phút</li>
+                        <li style="list-style-type: circle">Chính sách nhanh - tiện</li>
+                        <li style="list-style-type: circle">Chính sách về bảo mật thông tin</li>
+                        <li style="list-style-type: circle">Chính sách khách hàng thân thiết</li>
+                        <li style="list-style-type: circle">Phương thức thanh toán</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div style="text-align:left ;color: aliceblue">
+                    <h4>KẾT NỐI VỚI CHÚNG TÔI NGAY</h4>
+                </div>
+                <p>
+                    <a href="#">
+                        <img src="~/Content/images/thuexelink.jpg" style="width:300px;height:300px;float:left">
+                    </a>
+                </p>
 
+            </div>
+        </div>
     </div>
-    <div id="div-main">
 
-        <div id="div-containt">
-            <div id="div-slidetrai">
-                <div class="slideshow-container">
-                    <div class="mySlides1">
-                        <img src="~/Content/images/slide1.jpg" style="width:100%;height:350px;object-fit:cover">
-                    </div>
+    @*<script src="~/Scripts/jquery-3.4.1.min.js"></script>*@
+    <script src="~/Scripts/moment.min.js"></script>
+    <script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
 
-                    <div class="mySlides1">
-                        <img src="~/Content/images/slide2.jpg" style="width: 100%; height: 350px; object-fit: cover">
-                    </div>
-                    <div class="mySlides1">
-                        <img src="~/Content/images/slide3.jpg" style="width: 100%; height: 350px; object-fit: cover">
-                    </div>
-
-                    <a class="prev" onclick="plusSlides(-1, 0)">&#10094;</a>
-                    <a class="next" onclick="plusSlides(1, 0)">&#10095;</a>
-                </div>
-                <script>
-                    let slideIndex = [1, 1];
-                    let slideId = ["mySlides1", "mySlides2"]
-                    showSlides(1, 0);
-                    showSlides(1, 1);
-
-                    function plusSlides(n, no) {
-                        showSlides(slideIndex[no] += n, no);
-                    }
-
-                    function showSlides(n, no) {
-                        let i;
-                        let x = document.getElementsByClassName(slideId[no]);
-                        if (n > x.length) { slideIndex[no] = 1 }
-                        if (n < 1) { slideIndex[no] = x.length }
-                        for (i = 0; i < x.length; i++) {
-                            x[i].style.display = "none";
-                        }
-                        x[slideIndex[no] - 1].style.display = "block";
-                    }
-                </script>
-            </div>
-            <div id="div-slidephai">
-                <div id="div-anhslidephai1">
-                    <img src="~/Content/images/slide1-a.png" style="width: 100%; height: 170px; object-fit: cover">
-                </div>
-                <div id="div-anhslidephai2">
-                    <img src="~/Content/images/slide1-b.png" style="width: 100%; height: 170px; object-fit: cover">
-                </div>
-            </div>
-            <div id="div-slideunder">
-                <div id="div-slideunder1">
-                    <img src="~/Content/images/ud1.jpg" style="width: 100%; height: 120px; border-radius: 10px; object-fit: cover">
-                </div>
-                <div id="div-slideunder2">
-                    <img src="~/Content/images/ud2.jpg" style="width: 100%; height: 120px; margin-left: 10px; border-radius: 10px; object-fit: cover">
-                </div>
-            </div>
-        </div>
-        </div>
-
-        <div class="container body-content">
-            <div id="div-main-body">
-                <div class="row">
-                    <div class="col-md-2">
-                        <h3>Danh mục sản phẩm</h3>
-                        @Html.Action("GetProductsByCategory", "Product")
-                    </div>
-                    <div class="col-md-10">
-                        @RenderBody()
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="div-footer">
-            <div class="row">
-                <div class="col-sm-4">
-                    <div id="list-store">
-                        <h4 style="text-align:center; color:aliceblue"><b>Các chi nhánh thuê xe</b></h4>
-                        <div id="format-address">
-                            <ul>
-                                <li>
-                                    <img src="~/Content/images/address.png" id="address">
-                                    <span id="address-span"><b>TP.HCM - Quận 1:</b> 180 Trần Hưng Đạo P. Nguyễn Cư Trinh</span>
-                                </li>
-                                <li>
-                                    <img src="~/Content/images/address.png" id="address">
-                                    <span id="address-span"><b>TP.HCM - Quận 1:</b> 37 Lý Tự Trọng, P. Bến Nghé</span>
-                                </li>
-                                <li>
-                                    <img src="~/Content/images/address.png" id="address">
-                                    <span id="address-span"><b>TP.HCM - Quận 2:</b> 16 Quốc Hương, P.Thảo Điền</span>
-                                </li>
-                                <li>
-                                    <img src="~/Content/images/address.png" id="address">
-                                    <span id="address-span"><b>TP.HCM - Quận 7:</b> 103A Nguyễn Thị Thập, P. Tân Phú</span>
-                                </li>
-                                <li>
-                                    <img src="~/Content/images/address.png" id="address">
-                                    <span id="address-span"><b>TP.HCM - Quận 7:</b> 954 Nguyễn Văn Linh, P. Tân Phong</span>
-                                </li>
-                                <li>
-                                    <img src="~/Content/images/address.png" id="address">
-                                    <span id="address-span"><b>TP.HCM - Quận 7:</b> Lotte Mart 469 Nguyễn Hữu Thọ, P. Tân Phong</span>
-                                </li>
-                                <li>
-                                    <img src="~/Content/images/address.png" id="address">
-                                    <span id="address-span"><b>TP.HCM - Quận 10:</b> 235-241 Nguyễn Tri Phương, P. 5</span>
-                                </li>
-                                <li>
-                                    <img src="~/Content/images/address.png" id="address">
-                                    <span id="address-span"><b>TP.HCM - Quận 11:</b> 94 Hòa Bình, P. 5</span>
-                                </li>
-                                <li>
-                                    <img src="~/Content/images/address.png" id="address">
-                                    <span id="address-span"><b>TP.HCM - Quận Gò Vấp:</b> 1031 Phan Văn Trị, P.10</span>
-                                </li>
-                                <li>
-                                    <img src="~/Content/images/address.png" id="address">
-                                    <span id="address-span"><b>TP.HCM - Quận Gò Vấp:</b> Lotte Mart 242 Nguyễn Văn Lượng, P.10</span>
-                                </li>
-                                <li>
-                                    <img src="~/Content/images/address.png" id="address">
-                                    <span id="address-span"><b>TP.HCM - Quận Tân Phú:</b> 367 Tân Sơn Nhì, P.Tân Thành</span>
-                                </li>
-                                <li>
-                                    <img src="~/Content/images/address.png" id="address">
-                                    <span id="address-span"><b>HÀ NỘI - Quận Tây Hồ:</b> 38 An Dương Vương, Phú Thượng, Tây Hồ</span>
-                                </li>
-                            </ul>
-                        </div>
-                        <div id="view-address">
-                            <a href="#">
-                                <div style="text-align: center; color: orangered;">
-                                    <b>Xem thêm các địa chỉ khác</b>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-2">
-                    <div style="text-align: left; color: aliceblue">
-                        <h4>DANH MỤC</h4>
-                        <ul class="a">
-                            <li style="list-style-type: circle">Trang Chủ</li>
-                            <li style="list-style-type: circle">Thuê ngay</li>
-                            <li style="list-style-type: circle">Khuyến Mãi</li>
-                            <li style="list-style-type: circle">Tuyển dụng</li>
-                            <li style="list-style-type: circle">Liên hệ</li>
-                            <li style="list-style-type: circle">Giới thiệu</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-sm-3">
-                    <div style="text-align: left; color: aliceblue">
-                        <h4 style="margin-top:10px">CHĂM SÓC KHÁCH HÀNG</h4>
-                        <ul class="a">
-                            <li style="list-style-type: circle;">Hoàn tất thủ tục trong 15 phút</li>
-                            <li style="list-style-type: circle">Chính sách nhanh - tiện</li>
-                            <li style="list-style-type: circle">Chính sách về bảo mật thông tin</li>
-                            <li style="list-style-type: circle">Chính sách khách hàng thân thiết</li>
-                            <li style="list-style-type: circle">Phương thức thanh toán</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-sm-3">
-                    <div style="text-align:left ;color: aliceblue">
-                        <h4>KẾT NỐI VỚI CHÚNG TÔI NGAY</h4>
-                    </div>
-                    <p>
-                        <a href="#">
-                            <img src="~/Content/images/thuexelink.jpg" style="width:300px;height:300px;float:left">
-                        </a>
-                    </p>
-
-                </div>
-            </div>
-        </div>
-        <script src="~/Scripts/jquery-3.4.1.min.js"></script>
-        <script src="~/Scripts/moment.min.js"></script>
-        <script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
-        <script src="~/Scripts/bootstrap.min.js"></script>
-        @RenderSection("scripts", false)
+    @*bt 4.5*@
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    @RenderSection("scripts", false)
 </body>
 </html>

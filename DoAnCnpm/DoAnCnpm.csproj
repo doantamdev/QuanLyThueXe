@@ -186,6 +186,7 @@
     <Compile Include="Models\HighChart.cs">
       <DependentUpon>DoanPMEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ListProduct.cs" />
     <Compile Include="Models\OrderDetail.cs">
       <DependentUpon>DoanPMEntities.tt</DependentUpon>
     </Compile>
@@ -280,10 +281,12 @@
     <Content Include="Content\img\vni.d1b15e7a.jpg" />
     <Content Include="Content\img\vnpay.780689d6.png" />
     <Content Include="Content\img\zalo.png" />
+    <Content Include="Content\login.css" />
     <Content Include="Content\mystye2.css" />
     <Content Include="Content\mystyle.css" />
     <Content Include="Content\mystyleauthen.css" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Content\register.css" />
     <Content Include="Content\showsp.css" />
     <Content Include="Content\slide.css" />
     <Content Include="Content\style.css" />
@@ -457,6 +460,7 @@
     <Content Include="Views\Role\Delete.cshtml" />
     <Content Include="Views\Role\Index.cshtml" />
     <Content Include="Views\Payment\PaymentStatus.cshtml" />
+    <Content Include="Views\Product\ProductList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
