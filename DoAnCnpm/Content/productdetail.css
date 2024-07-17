@@ -1,0 +1,221 @@
+﻿
+/* details */
+.product-detail {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 0;
+}
+
+
+.product-image {
+    width: 40%;
+    max-height: 400px;
+    margin: 0 50px 0 0;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 5px 3px 2px #004643;
+}
+
+    .product-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+.product-info {
+    width: 40%;
+}
+
+.pro-name {
+    font-size: 32px;
+    margin: 0 0 15px 0;
+}
+
+.pro-desc {
+    font-size: 18px;
+    margin: 0 0 20px 0;
+}
+
+    .pro-desc span {
+        font-weight: bold;
+        color: #004643;
+    }
+
+.pro-price span {
+    font-weight: bold;
+    color: #004643;
+    font-size: 18px;
+}
+
+.pro-price {
+    font-size: 22px;
+    margin: 0 0 20px 0;
+}
+
+.order-btn {
+    padding: 10px 40px !important;
+    font-size: 20px !important;
+}
+
+/* CSS */
+.order-btn {
+    align-items: center;
+    appearance: none;
+    background-color: #000;
+    border-radius: 4px;
+    border-width: 0;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    display: inline-flex;
+    font-family: "JetBrains Mono",monospace;
+    height: 48px;
+    justify-content: center;
+    line-height: 1;
+    list-style: none;
+    overflow: hidden;
+    padding-left: 16px;
+    padding-right: 16px;
+    position: relative;
+    text-align: left;
+    text-decoration: none;
+    transition: box-shadow .15s,transform .15s;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: nowrap;
+    will-change: box-shadow,transform;
+    font-size: 18px;
+}
+
+    .order-btn:focus {
+        box-shadow: #D6D6E7 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+    }
+
+    .order-btn:hover {
+        box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+        transform: translateY(-2px);
+        text-decoration: none;
+        color: #fff;
+        background-color: #004643;
+    }
+
+    .order-btn:active {
+        box-shadow: #D6D6E7 0 3px 7px inset;
+        transform: translateY(2px);
+    }
+
+div.stars {
+    width: 270px;
+    display: inline-block;
+}
+
+input.star {
+    display: none;
+}
+
+label.star {
+    float: right;
+    padding: 10px;
+    font-size: 36px;
+    color: #444;
+    transition: all .2s;
+}
+
+input.star:checked ~ label.star:before {
+    content: '\f005';
+    color: #FD4;
+    transition: all .25s;
+}
+
+input.star-5:checked ~ label.star:before {
+    color: #FE7;
+    text-shadow: 0 0 20px #952;
+}
+
+input.star-1:checked ~ label.star:before {
+    color: #F62;
+}
+
+label.star:hover {
+    transform: rotate(-15deg) scale(1.3);
+}
+
+label.star:before {
+    content: '\f006';
+    font-family: FontAwesome;
+}
+/* comment */
+.comment {
+    padding: 40px 120px;
+}
+
+.comment-head {
+    max-width: 500px;
+    margin: 20px 0 10px 0;
+}
+
+.comment-form {
+    max-width: 500px;
+    border-radius: 30px;
+    border: 2px solid #004643;
+    overflow: hidden;
+    margin: 20px 0;
+}
+
+    .comment-form input {
+        padding: 30px 20px;
+        border: none;
+        outline: none;
+    }
+
+.comment-btn {
+    background-color: #004643;
+    padding: 10px 40px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    border: none;
+}
+
+    .comment-btn:hover {
+        color: #004643;
+        background-color: #fff;
+        text-decoration: none;
+        transform: translateY(-5px);
+        box-shadow: 5px 3px 2px #004643;
+        border: 1px solid #004643;
+        transition: box-shadow .15s, transform .15s;
+    }
+
+.comment-list {
+    max-width: 800px;
+    max-height: 500px;
+    overflow: hidden;
+    overflow-y: scroll;
+    list-style-type: none;
+    padding: 20px;
+}
+
+.comment-item {
+    margin: 25px 0;
+    padding: 15px 20px;
+    border: 1px solid #004643;
+    border-radius: 10px;
+    box-shadow: 5px 3px 2px #004643;
+}
+
+.comment-item-head {
+    height: 100%;
+}
+
+    .comment-item-head .comment-name {
+        font-weight: bold;
+    }
+
+.comment-item-content {
+    padding: 10px 0;
+}
+

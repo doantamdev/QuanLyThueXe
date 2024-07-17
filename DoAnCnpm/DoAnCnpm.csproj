@@ -286,6 +286,7 @@
     <Content Include="Content\mystyle.css" />
     <Content Include="Content\mystyleauthen.css" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Content\productdetail.css" />
     <Content Include="Content\register.css" />
     <Content Include="Content\showsp.css" />
     <Content Include="Content\slide.css" />
